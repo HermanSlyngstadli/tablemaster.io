@@ -10,9 +10,8 @@ const StyledContainer = styled.div`
     grid-template-columns: repeat(12, 1fr);
     gap: 16px;
     padding: 0 24px;
-    max-width: 1600px;
     margin: 0 auto;
-    width: 100%;
+    flex-grow: 1;
     @media only screen and (max-width: 850px) {
         padding: 0 24px;
     }
