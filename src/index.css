@@ -1,0 +1,29 @@
+@font-face {
+    font-family: 'Open Sans';
+    src: local('Open Sans'), url(./fonts/static/OpenSans/OpenSans-Regular.ttf) format('truetype');
+}
+
+:root {
+    --panel-border-radius: 1rem;
+    --panel-bg-color: #ffffff;
+    --page-bg-color: #ecf0f1;
+    --font-color: #2c3e50;
+    --box-shadow-default: 0 0 1rem rgba(189, 195, 199, 0.2);
+}
+
+* {
+    font-family: 'Open Sans', Arial, sans-serif;
+    color: var(--font-color);
+}
+
+:root,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    background: var(--page-bg-color);
+    min-height: 100%;
+}
