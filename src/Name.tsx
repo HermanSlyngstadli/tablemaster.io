@@ -12,7 +12,7 @@ export const NameGenerator = () => {
     console.log()
 
     const generate = () => {
-        let result = []
+        const result = []
         for (let i = 0; i <= 10; i++) {
             result.push(generateNames(beginnings, ngrams, 2))
         }

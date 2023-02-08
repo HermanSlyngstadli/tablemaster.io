@@ -1,3 +1,4 @@
+import React from 'react'
 import { Line } from '@react-three/drei'
 
 type BoundingBoxType = {

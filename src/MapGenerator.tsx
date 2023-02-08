@@ -28,7 +28,7 @@ export const MapGenerator = () => {
     const height = 20
 
     const generateArray = () => {
-        let tempNodes: number[][] = []
+        const tempNodes: number[][] = []
         for (let i = 0; i < length; i++) {
             for (let j = 0; j < height; j++) {
                 tempNodes.push([
@@ -42,7 +42,7 @@ export const MapGenerator = () => {
     const [nodes, setNodes] = useState<number[][]>(generateArray())
     const delaunator = Delaunator.from(nodes)
 
-    let tempTriangles: number[][][] = []
+    const tempTriangles: number[][][] = []
     for (let e = 0; e < delaunator.triangles.length; e++) {
         if (e > delaunator.halfedges[e]) {
             const p = nodes[delaunator.triangles[e]]
@@ -58,11 +58,11 @@ export const MapGenerator = () => {
         return false
     }
 
-    let tempVoronoi: number[][][] = []
+    const tempVoronoi: number[][][] = []
     for (let e = 0; e < delaunator.triangles.length; e++) {
         if (e < delaunator.halfedges[e]) {
-            let p = triangleCenter(nodes, delaunator, triangleOfEdge(e))
-            let q = triangleCenter(nodes, delaunator, triangleOfEdge(delaunator.halfedges[e]))
+            const p = triangleCenter(nodes, delaunator, triangleOfEdge(e))
+            const q = triangleCenter(nodes, delaunator, triangleOfEdge(delaunator.halfedges[e]))
 
             tempVoronoi.push([p, q])
         }

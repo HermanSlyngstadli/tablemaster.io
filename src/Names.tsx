@@ -1,4 +1,4 @@
-export const names = [
+export const names: string[] = [
     'duval',
     'krong',
     'braks',
