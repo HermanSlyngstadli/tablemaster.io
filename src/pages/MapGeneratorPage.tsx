@@ -5,19 +5,10 @@ import { nextHalfedge, triangleCenter, triangleOfEdge } from '../delaunayFunctio
 import { Canvas } from '@react-three/fiber'
 import { OrthographicCamera, Line, OrbitControls } from '@react-three/drei'
 import { SideNavigation } from '../components/SideNavigation'
-import { Heading1 } from '../components/Typography'
 import { BoundingBox } from '../components/BoundingBox'
 import { PageContainer } from '../components/PageContainer'
 import { Button } from '../components/Button'
-
-const SidePanel = styled.div`
-    flex-basis: 300px;
-    padding: 24px;
-    box-shadow: var(--box-shadow-default);
-    background-color: var(--panel-bg-color);
-    position: relative;
-    z-index: 2;
-`
+import { RefreshIcon } from '../components/icons/RefreshIcon'
 
 const CanvasContainer = styled.div`
     flex-grow: 1;
@@ -75,11 +66,14 @@ export const MapGeneratorPage = () => {
     return (
         <PageContainer>
             <SideNavigation />
-            <SidePanel>
-                <Heading1>Map Generator</Heading1>
-                <Button onClick={() => regenerateDelaunay()}>Generate</Button>
-            </SidePanel>
+
             <CanvasContainer>
+                <Button
+                    style={{ position: 'absolute', right: '16px', top: '16px', zIndex: '2' }}
+                    onClick={() => regenerateDelaunay()}
+                >
+                    <RefreshIcon color={'#fafafa'} /> Generate
+                </Button>
                 <Canvas>
                     <ambientLight intensity={0.3} />
                     <OrthographicCamera />

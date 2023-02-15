@@ -22,11 +22,16 @@ export const makeNgrams = (names: string[], order: number) => {
     return { ngrams: ngrams, beginnings: beginnings }
 }
 
-export const generateNames = (beginnings: string[], ngrams: Record<string, string[]>, order: number) => {
+export const generateNames = (
+    beginnings: string[],
+    ngrams: Record<string, string[]>,
+    order: number,
+    maxNameLength: number
+) => {
     let currentGram = beginnings[Math.floor(beginnings.length * Math.random())]
     let result = currentGram
 
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < maxNameLength - order; i++) {
         const possibilities = ngrams[currentGram]
         if (!possibilities) {
             break

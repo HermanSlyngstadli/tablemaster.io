@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { DiceIcon } from './icons/DiceIcon'
-import { GlobeIcon } from './icons/GlobeIcon'
 import { HomeIcon } from './icons/HomeIcon'
+import { MapIcon } from './icons/MapIcon'
 import { NoteIcon } from './icons/NoteIcon'
 
 const NavContainer = styled.nav`
@@ -14,14 +14,16 @@ const NavContainer = styled.nav`
 `
 
 const NavLinkList = styled.div`
+    display: flex;
+    flex-direction: column;
     padding: 12px;
+    gap: 8px;
 `
 
 const NavLink = styled.a`
     display: flex;
     height: 56px;
     width: 56px;
-    margin-bottom: 16px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -40,9 +42,10 @@ export const SideNavigation = ({ ...props }) => {
                     <HomeIcon color={'#fff'} />
                 </NavLink>
             </NavLinkList>
+            <hr style={{ border: '1px solid #592f57', margin: '0' }} />
             <NavLinkList>
                 <NavLink href={'/map-generator'}>
-                    <GlobeIcon color={'#fff'} />
+                    <MapIcon color={'#fff'} />
                 </NavLink>
 
                 <NavLink href={'/name-generator'}>

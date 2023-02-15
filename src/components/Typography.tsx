@@ -17,3 +17,9 @@ export const Heading2 = styled.h2`
 export const Paragraph = styled.p`
     font-size: 1rem;
 `
+
+export const Label = styled.label`
+    display: block;
+    font-size: 0.75rem;
+    margin-bottom: 24px;
+`

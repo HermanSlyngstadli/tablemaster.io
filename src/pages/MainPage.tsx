@@ -5,7 +5,7 @@ import { PageContainer } from '../components/PageContainer'
 import { SideNavigation } from '../components/SideNavigation'
 import { DiceIcon } from '../components/icons/DiceIcon'
 import { NoteIcon } from '../components/icons/NoteIcon'
-import { GlobeIcon } from '../components/icons/GlobeIcon'
+import { MapIcon } from '../components/icons/MapIcon'
 
 export const MainPage = () => {
     return (
@@ -14,7 +14,7 @@ export const MainPage = () => {
             <GridContainer>
                 <GridItem large={'span 4'} small={'span 12'}>
                     <NavigationCard href={'/map-generator'}>
-                        <GlobeIcon />
+                        <MapIcon />
                         World Map Generator
                     </NavigationCard>
                 </GridItem>

@@ -13,6 +13,7 @@ type StyledContainerTypes = {
 const StyledContainer = styled.div<StyledContainerTypes>`
     display: grid;
     grid-template-columns: repeat(12, 1fr);
+    grid-auto-flow: column;
     gap: 16px;
     padding: 0 ${(props: StyledContainerTypes) => props.padding}px;
     max-width: 1600px;
