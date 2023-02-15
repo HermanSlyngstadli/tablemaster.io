@@ -1,12 +1,13 @@
 import React from 'react'
-import { ArrowLeftIcon } from '@radix-ui/react-icons'
 import styled from 'styled-components'
+import { ArrowLeftIcon } from './icons/ArrowLeftIcon'
 
 const StyledBackButton = styled.a`
     display: flex;
     align-items: center;
     padding: 0.75rem 0.25rem;
     border-radius: var(--panel-border-radius);
+    gap: 0.25rem;
 
     &:hover {
         background: #bdc3c7;
@@ -16,7 +17,7 @@ const StyledBackButton = styled.a`
 export const BackButton = ({ ...props }) => {
     return (
         <StyledBackButton href="/" {...props}>
-            <ArrowLeftIcon style={{ marginRight: '0.5rem' }} /> Tilbake til oversikten
+            <ArrowLeftIcon /> Tilbake til oversikten
         </StyledBackButton>
     )
 }

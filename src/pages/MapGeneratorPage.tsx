@@ -1,21 +1,17 @@
 import React, { useState } from 'react'
-import { Canvas } from '@react-three/fiber'
 import styled from 'styled-components'
-import { SideNavigation } from './components/SideNavigation'
-import { Heading1 } from './components/Typography'
-import { OrthographicCamera, Line, OrbitControls } from '@react-three/drei'
 import Delaunator from 'delaunator'
-import { nextHalfedge, triangleCenter, triangleOfEdge } from './delaunayFunctions'
-import { BoundingBox } from './components/BoundingBox'
-
-const PageContainer = styled.div`
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-`
+import { nextHalfedge, triangleCenter, triangleOfEdge } from '../delaunayFunctions'
+import { Canvas } from '@react-three/fiber'
+import { OrthographicCamera, Line, OrbitControls } from '@react-three/drei'
+import { SideNavigation } from '../components/SideNavigation'
+import { Heading1 } from '../components/Typography'
+import { BoundingBox } from '../components/BoundingBox'
+import { PageContainer } from '../components/PageContainer'
+import { Button } from '../components/Button'
 
 const SidePanel = styled.div`
-    width: 300px;
+    flex-basis: 300px;
     padding: 24px;
     box-shadow: var(--box-shadow-default);
     background-color: var(--panel-bg-color);
@@ -23,7 +19,11 @@ const SidePanel = styled.div`
     z-index: 2;
 `
 
-export const MapGenerator = () => {
+const CanvasContainer = styled.div`
+    flex-grow: 1;
+`
+
+export const MapGeneratorPage = () => {
     const length = 40
     const height = 20
 
@@ -77,24 +77,26 @@ export const MapGenerator = () => {
             <SideNavigation />
             <SidePanel>
                 <Heading1>Map Generator</Heading1>
-                <button onClick={() => regenerateDelaunay()}>Generate</button>
+                <Button onClick={() => regenerateDelaunay()}>Generate</Button>
             </SidePanel>
-            <Canvas>
-                <ambientLight intensity={0.3} />
-                <OrthographicCamera />
-                <OrbitControls enableRotate={false} />
+            <CanvasContainer>
+                <Canvas>
+                    <ambientLight intensity={0.3} />
+                    <OrthographicCamera />
+                    <OrbitControls enableRotate={false} />
 
-                {tempVoronoi.map((tri) => (
-                    <Line
-                        key={tri[0][0] + tri[0][1] + tri[1][1] + tri[1][1]}
-                        points={[
-                            [tri[0][0], tri[0][1], 0],
-                            [tri[1][0], tri[1][1], 0],
-                        ]}
-                    />
-                ))}
-                <BoundingBox height={height} length={length} />
-            </Canvas>
+                    {tempVoronoi.map((tri) => (
+                        <Line
+                            key={tri[0][0] + tri[0][1] + tri[1][1] + tri[1][1]}
+                            points={[
+                                [tri[0][0], tri[0][1], 0],
+                                [tri[1][0], tri[1][1], 0],
+                            ]}
+                        />
+                    ))}
+                    <BoundingBox height={height} length={length} />
+                </Canvas>
+            </CanvasContainer>
         </PageContainer>
     )
 }
@@ -108,4 +110,3 @@ export const MapGenerator = () => {
     />
 ))}
 */
-export default MapGenerator

@@ -1,13 +1,13 @@
 type ngramTypes = {}
 
 export const makeNgrams = (names: string[], order: number) => {
-    let ngrams: Record<string, string[]> = {}
-    let beginnings = []
+    const ngrams: Record<string, string[]> = {}
+    const beginnings = []
 
     for (let j = 0; j < names.length; j++) {
-        let txt = names[j].toLowerCase()
+        const txt = names[j].toLowerCase()
         for (let i = 0; i <= txt.length - order; i++) {
-            let gram = txt.substring(i, i + order)
+            const gram = txt.substring(i, i + order)
             if (i == 0) {
                 beginnings.push(gram)
             }
@@ -27,13 +27,13 @@ export const generateNames = (beginnings: string[], ngrams: Record<string, strin
     let result = currentGram
 
     for (let i = 0; i < 8; i++) {
-        let possibilities = ngrams[currentGram]
+        const possibilities = ngrams[currentGram]
         if (!possibilities) {
             break
         }
-        let next = possibilities[Math.floor(possibilities.length * Math.random())]
+        const next = possibilities[Math.floor(possibilities.length * Math.random())]
         result += next
-        let len = result.length
+        const len = result.length
         currentGram = result.substring(len - order, len)
     }
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ArrowRightIcon } from '@radix-ui/react-icons'
 
 const StyledPanelLink = styled.a`
     display: flex;
@@ -31,7 +30,6 @@ export const PanelLink = ({ children, href, ...props }: PanelLinkTypes) => {
     return (
         <StyledPanelLink {...props} href={href}>
             {children}
-            <ArrowRightIcon height={16} width={16} />
         </StyledPanelLink>
     )
 }

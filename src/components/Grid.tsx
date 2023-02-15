@@ -3,13 +3,18 @@ import styled from 'styled-components'
 
 type GridContainerProps = {
     children: JSX.Element | JSX.Element[]
+    padding?: number
 }
 
-const StyledContainer = styled.div`
+type StyledContainerTypes = {
+    padding: number
+}
+
+const StyledContainer = styled.div<StyledContainerTypes>`
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: 16px;
-    padding: 0 24px;
+    padding: 0 ${(props: StyledContainerTypes) => props.padding}px;
     max-width: 1600px;
     margin: 0 auto;
     width: 100%;
@@ -18,14 +23,19 @@ const StyledContainer = styled.div`
     }
 `
 
-export const GridContainer = ({ children, ...props }: GridContainerProps) => {
-    return <StyledContainer {...props}>{children}</StyledContainer>
+export const GridContainer = ({ children, padding = 24, ...props }: GridContainerProps) => {
+    return (
+        <StyledContainer padding={padding} {...props}>
+            {children}
+        </StyledContainer>
+    )
 }
 
 type GridItemProps = {
     children: JSX.Element | JSX.Element[]
     small?: string
     large?: string
+    style?: React.CSSProperties
 }
 
 const Item = styled.div<GridItemProps>`
@@ -35,9 +45,9 @@ const Item = styled.div<GridItemProps>`
     }
 `
 
-export const GridItem = ({ children, small, large, ...props }: GridItemProps) => {
+export const GridItem = ({ children, small, large, style, ...props }: GridItemProps) => {
     return (
-        <Item {...props} small={small} large={large}>
+        <Item {...props} small={small} large={large} style={style}>
             {children}
         </Item>
     )
