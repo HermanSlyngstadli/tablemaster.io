@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { CartIcon } from './icons/CartIcon'
 import { DiceIcon } from './icons/DiceIcon'
 import { HomeIcon } from './icons/HomeIcon'
 import { MapIcon } from './icons/MapIcon'
@@ -54,6 +55,10 @@ export const SideNavigation = ({ ...props }) => {
 
                 <NavLink href={'/mood-sounds'}>
                     <NoteIcon color={'#fff'} />
+                </NavLink>
+
+                <NavLink href={'/magicshop'}>
+                    <CartIcon color={'#fff'} />
                 </NavLink>
             </NavLinkList>
         </NavContainer>

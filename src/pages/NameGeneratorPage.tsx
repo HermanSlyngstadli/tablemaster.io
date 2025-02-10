@@ -6,20 +6,21 @@ import { PageContainer } from '../components/PageContainer'
 import { SideNavigation } from '../components/SideNavigation'
 import { Heading1, Heading2, Label, Paragraph } from '../components/Typography'
 import { generateNames, makeNgrams } from '../markovFunctions'
-import { names } from '../Names'
+import { dyr, monster, names } from '../Names'
 
 export const NameGeneratorPage = () => {
     const [currentNames, setCurrentNames] = useState(['No current names...'])
     const [numberOfNames, setNumberOfNames] = useState({ value: 10 })
     const [maxNameLength, setmaxNameLength] = useState({ value: 6 })
+    const nameList = monster
 
-    const { ngrams, beginnings } = makeNgrams(names, 2)
+    const { ngrams, beginnings } = makeNgrams(nameList, 2)
 
     const generate = () => {
         const result = []
         while (result.length <= numberOfNames.value) {
             const newName = generateNames(beginnings, ngrams, 2, maxNameLength.value)
-            if (!names.includes(newName)) result.push(newName)
+            if (!nameList.includes(newName)) result.push(newName)
         }
 
         setCurrentNames(result)
