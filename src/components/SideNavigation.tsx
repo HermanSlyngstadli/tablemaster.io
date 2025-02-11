@@ -43,7 +43,6 @@ export const SideNavigation = ({ ...props }) => {
                     <HomeIcon color={'#fff'} />
                 </NavLink>
             </NavLinkList>
-            <hr style={{ border: '1px solid #592f57', margin: '0' }} />
             <NavLinkList>
                 <NavLink href={'/map-generator'}>
                     <MapIcon color={'#fff'} />
@@ -59,6 +58,11 @@ export const SideNavigation = ({ ...props }) => {
 
                 <NavLink href={'/magicshop'}>
                     <CartIcon color={'#fff'} />
+                </NavLink>
+            </NavLinkList>
+            <NavLinkList>
+                <NavLink href={'/login'}>
+                    <CartIcon color={'#30b7d9'} />
                 </NavLink>
             </NavLinkList>
         </NavContainer>
