@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { CartIcon } from './icons/CartIcon'
 import { DiceIcon } from './icons/DiceIcon'
 import { HomeIcon } from './icons/HomeIcon'
 import { MapIcon } from './icons/MapIcon'
 import { NoteIcon } from './icons/NoteIcon'
+import { supabase } from '../supabaseClient'
 
 const NavContainer = styled.nav`
     height: 100vh;
@@ -36,6 +37,31 @@ const NavLink = styled.a`
 `
 
 export const SideNavigation = ({ ...props }) => {
+    const [session, setSession] = useState<any>()
+
+    useEffect(() => {
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            setSession(session)
+        })
+
+        const {
+            data: { subscription },
+        } = supabase.auth.onAuthStateChange((_event, session) => {
+            setSession(session)
+        })
+
+        return () => subscription.unsubscribe()
+    }, [])
+
+    const signOut = async () => {
+        let { error } = await supabase.auth.signOut()
+    }
+
+    const signUp = async () => {
+        await supabase.auth.signInWithOAuth({
+            provider: 'google',
+        })
+    }
     return (
         <NavContainer {...props}>
             <NavLinkList>
@@ -61,9 +87,8 @@ export const SideNavigation = ({ ...props }) => {
                 </NavLink>
             </NavLinkList>
             <NavLinkList>
-                <NavLink href={'/login'}>
-                    <CartIcon color={'#30b7d9'} />
-                </NavLink>
+                {!session && <button onClick={() => signUp()}>Login</button>}
+                {session && <button onClick={() => signOut()}>Logg ut</button>}
             </NavLinkList>
         </NavContainer>
     )

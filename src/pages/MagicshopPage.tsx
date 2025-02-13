@@ -4,12 +4,38 @@ import { SideNavigation } from '../components/SideNavigation'
 import { supabase } from '../supabaseClient'
 import { GridContainer, GridItem } from '../components/Grid'
 import { Tables } from '../database-generated.types'
+import styled from 'styled-components'
+
+const ItemCardContainer = styled.div`
+    width: 100%;
+`
+
+const ItemCard = styled.div`
+    padding: 1em;
+    background: #fbfafa;
+    border: 2px #dad0c6;
+    border-radius: 1rem;
+
+    p {
+        font-size: 0.75rem;
+    }
+
+    div {
+        border-radius: 1rem;
+        background: #ede9e9;
+        height: 8rem;
+    }
+`
 
 export const MagicshopPage = () => {
-    const [session, setSession] = useState<any>()
     type ItemType = Tables<'Items'>
 
     const [itemList, setItemList] = useState<ItemType[]>([])
+    const [session, setSession] = useState<any>(null)
+
+    supabase.auth.getSession().then(({ data }) => {
+        setSession(data.session)
+    })
 
     async function getItems() {
         let { data: items, error } = await supabase.from('Items').select('*').returns<ItemType[]>()
@@ -23,77 +49,35 @@ export const MagicshopPage = () => {
     }
 
     useEffect(() => {
-        supabase.auth.getSession().then(({ data: { session } }) => {
-            setSession(session)
-        })
-
-        const {
-            data: { subscription },
-        } = supabase.auth.onAuthStateChange((_event, session) => {
-            setSession(session)
-        })
-
         getItems()
-
-        return () => subscription.unsubscribe()
     }, [])
 
-    console.log(session?.user?.email)
-
-    const signOut = async () => {
-        const { error } = await supabase.auth.signOut()
-    }
-
-    const signUp = async () => {
-        await supabase.auth.signInWithOAuth({
-            provider: 'google',
-        })
-    }
-
-    if (!session) {
-        return (
-            <>
-                {/* <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />; */}
-                <PageContainer>
-                    <SideNavigation />
-                    <div>
-                        <button onClick={signUp}>Sign in with Google</button>
-                    </div>
-                </PageContainer>
-            </>
-        )
-    } else {
-        console.log(itemList)
-        return (
-            <div>
-                <PageContainer>
-                    <SideNavigation />
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                        <GridContainer>
-                            <GridItem large="1 / 7">
-                                <div>
-                                    <h2>Welcome, {session?.user?.email}</h2>
-                                    <button onClick={signOut}>Sign out</button>
-                                </div>
-                                <div>
-                                    {itemList.map((item) => {
-                                        return (
-                                            <div key={item['id']}>
-                                                <h2>{item['name']}</h2>
-                                                <div>{item['description']}</div>
-                                            </div>
-                                        )
-                                    })}
-                                </div>
-                            </GridItem>
-                        </GridContainer>
-                    </div>
-                </PageContainer>
-            </div>
-        )
-    }
-    /*
     return (
-        
-    )*/
+        <PageContainer>
+            <SideNavigation />
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <GridContainer>
+                    <GridItem large={'1 / 12'}>
+                        <h1>Bellhands Magic Shop</h1>
+                    </GridItem>
+                    <GridItem large="1 / 12">
+                        <GridContainer padding={0}>
+                            {session &&
+                                itemList.map((item) => {
+                                    return (
+                                        <GridItem key={item['id']} large={'span 3'} small={'span 12'}>
+                                            <ItemCard>
+                                                <div></div>
+                                                <h2>{item['name']}</h2>
+                                                <p>{item['description']}</p>
+                                            </ItemCard>
+                                        </GridItem>
+                                    )
+                                })}
+                        </GridContainer>
+                    </GridItem>
+                </GridContainer>
+            </div>
+        </PageContainer>
+    )
 }
