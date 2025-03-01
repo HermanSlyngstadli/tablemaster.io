@@ -38,7 +38,7 @@ export const MagicshopPage = () => {
     })
 
     async function getItems() {
-        let { data: items, error } = await supabase.from('Items').select('*').returns<ItemType[]>()
+        const { data: items, error } = await supabase.from('Items').select('*').returns<ItemType[]>()
 
         if (error) {
             console.error(error)
@@ -62,18 +62,17 @@ export const MagicshopPage = () => {
                     </GridItem>
                     <GridItem large="1 / 12">
                         <GridContainer padding={0}>
-                            {session &&
-                                itemList.map((item) => {
-                                    return (
-                                        <GridItem key={item['id']} large={'span 3'} small={'span 12'}>
-                                            <ItemCard>
-                                                <div></div>
-                                                <h2>{item['name']}</h2>
-                                                <p>{item['description']}</p>
-                                            </ItemCard>
-                                        </GridItem>
-                                    )
-                                })}
+                            {itemList.map((item) => {
+                                return (
+                                    <GridItem key={item['id']} large={'span 3'} small={'span 12'}>
+                                        <ItemCard>
+                                            <div></div>
+                                            <h2>{item['name']}</h2>
+                                            <p>{item['description']}</p>
+                                        </ItemCard>
+                                    </GridItem>
+                                )
+                            })}
                         </GridContainer>
                     </GridItem>
                 </GridContainer>

@@ -37,12 +37,14 @@ const NavLink = styled.a`
 `
 
 export const SideNavigation = ({ ...props }) => {
+    /*
     const [session, setSession] = useState<any>()
+    const [profileImageURL, setProfileImageURL] = useState<string>()
 
     useEffect(() => {
         supabase.auth.getSession().then(({ data: { session } }) => {
             setSession(session)
-            console.log(session)
+            console.log(session?.user.user_metadata)
         })
 
         const {
@@ -52,7 +54,7 @@ export const SideNavigation = ({ ...props }) => {
         })
 
         return () => subscription.unsubscribe()
-    }, [])
+    }, [])*/
 
     const signOut = async () => {
         let { error } = await supabase.auth.signOut()
@@ -88,11 +90,13 @@ export const SideNavigation = ({ ...props }) => {
                     <CartIcon color={'#fff'} size={16} />
                 </NavLink>
             </NavLinkList>
-            <NavLinkList>
-                {!session && <button onClick={() => signUp()}>Login</button>}
-                {session && <button onClick={() => signOut()}>Logg ut</button>}
-                {console.log(session)}
-            </NavLinkList>
         </NavContainer>
     )
 }
+
+/*
+
+            <NavLinkList>
+                {!session && <button onClick={() => signUp()}>Login</button>}
+                {session && <button onClick={() => signOut()}>Logg ut</button>}
+            </NavLinkList>*/
