@@ -6,8 +6,8 @@ type ComponentTypes = {
     style?: React.CSSProperties
     heading: string
     tags: string
-    itemCost: string
-    imageURL: string
+    itemCost: number
+    imageURL: string | null
     action?: () => void
 }
 
@@ -26,13 +26,13 @@ const StyledCard = styled.div`
     }
 `
 interface ImageProps {
-    src: string
+    src: string | null
 }
 const ImageContainer = styled.div<ImageProps>`
     width: 100%;
     height: 200px;
     background-color: #ede9e9;
-    background-image: url(${(props) => props.src});
+    background-image: url(${(props) => props.src ? props.src : ''});
     background-size: contain;
     background-repeat: no-repeat;
     background-position-x: center;

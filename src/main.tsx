@@ -26,7 +26,7 @@ const router = createBrowserRouter([
         element: <MoodSoundsPage />,
     },
     {
-        path: '/magicshop',
+        path: '/magicshop/:uuid',
         element: <MagicshopPage />,
     },
 ])
