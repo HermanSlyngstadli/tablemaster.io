@@ -12,16 +12,21 @@ const StyledButton = styled.button`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 48px;
-    font-size: 1rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    padding: 16px;
+    letter-spacing: 0.1rem;
+    line-height: 100%;
+    padding: 0.5rem;
     border: none;
     border-radius: 4px;
-    background-color: #091e42;
-    color: #fff;
+    background-color: #1c0413;
+    color: var(--light-color);
     cursor: pointer;
     gap: 0.5rem;
+
+    &:hover {
+        background-color: var(--dark-color);
+    }
 `
 
 export const Button = ({ children, onClick, style }: ButtonTypes) => {

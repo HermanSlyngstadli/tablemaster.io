@@ -1,18 +1,20 @@
 @font-face {
-    font-family: 'Open Sans';
-    src: local('Open Sans'), url(./fonts/static/OpenSans/OpenSans-Regular.ttf) format('truetype');
+    font-family: 'Alegreya Sans';
+    src: local('Alegreya Sans'), url(./fonts/static/AlegreyaSans/AlegreyaSans-Regular.ttf) format('truetype');
 }
 
 :root {
     --panel-border-radius: 1rem;
     --panel-bg-color: #ffffff;
     --page-bg-color: #fbfafa;
+    --light-color: #fbfafa;
+    --dark-color: #4b1939;
     --font-color: #1c0413;
     --box-shadow-default: 0 0 1rem rgba(189, 195, 199, 0.2);
 }
 
 * {
-    font-family: 'Open Sans', Arial, sans-serif;
+    font-family: 'Alegreya Sans', Arial, sans-serif;
     color: var(--font-color);
 }
 
