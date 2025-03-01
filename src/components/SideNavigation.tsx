@@ -9,7 +9,7 @@ import { supabase } from '../supabaseClient'
 
 const NavContainer = styled.nav`
     height: 100vh;
-    width: 80px;
+    width: 60px;
     background: #2d142c;
     position: relative;
     z-index: 3;
@@ -24,8 +24,8 @@ const NavLinkList = styled.div`
 
 const NavLink = styled.a`
     display: flex;
-    height: 56px;
-    width: 56px;
+    height: 36px;
+    width: 36px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -42,6 +42,7 @@ export const SideNavigation = ({ ...props }) => {
     useEffect(() => {
         supabase.auth.getSession().then(({ data: { session } }) => {
             setSession(session)
+            console.log(session)
         })
 
         const {
@@ -60,35 +61,37 @@ export const SideNavigation = ({ ...props }) => {
     const signUp = async () => {
         await supabase.auth.signInWithOAuth({
             provider: 'google',
+            options: { redirectTo: import.meta.env.VITE_GOOGLE_REDIRECT_URL },
         })
     }
     return (
         <NavContainer {...props}>
             <NavLinkList>
                 <NavLink href={'/'}>
-                    <HomeIcon color={'#fff'} />
+                    <HomeIcon color={'#fff'} size={16} />
                 </NavLink>
             </NavLinkList>
             <NavLinkList>
                 <NavLink href={'/map-generator'}>
-                    <MapIcon color={'#fff'} />
+                    <MapIcon color={'#fff'} size={16} />
                 </NavLink>
 
                 <NavLink href={'/name-generator'}>
-                    <DiceIcon color={'#fff'} />
+                    <DiceIcon color={'#fff'} size={16} />
                 </NavLink>
 
                 <NavLink href={'/mood-sounds'}>
-                    <NoteIcon color={'#fff'} />
+                    <NoteIcon color={'#fff'} size={16} />
                 </NavLink>
 
                 <NavLink href={'/magicshop'}>
-                    <CartIcon color={'#fff'} />
+                    <CartIcon color={'#fff'} size={16} />
                 </NavLink>
             </NavLinkList>
             <NavLinkList>
                 {!session && <button onClick={() => signUp()}>Login</button>}
                 {session && <button onClick={() => signOut()}>Logg ut</button>}
+                {console.log(session)}
             </NavLinkList>
         </NavContainer>
     )

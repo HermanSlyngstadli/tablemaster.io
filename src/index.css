@@ -6,8 +6,8 @@
 :root {
     --panel-border-radius: 1rem;
     --panel-bg-color: #ffffff;
-    --page-bg-color: #ecf0f1;
-    --font-color: #510a32;
+    --page-bg-color: #fbfafa;
+    --font-color: #1c0413;
     --box-shadow-default: 0 0 1rem rgba(189, 195, 199, 0.2);
 }
 

@@ -18,7 +18,7 @@ export const NameGeneratorPage = () => {
 
     const generate = () => {
         const result = []
-        while (result.length <= numberOfNames.value) {
+        while (result.length <= numberOfNames.value - 1) {
             const newName = generateNames(beginnings, ngrams, 2, maxNameLength.value)
             if (!nameList.includes(newName)) result.push(newName)
         }
@@ -46,8 +46,6 @@ export const NameGeneratorPage = () => {
                         style={{
                             flexBasis: '300px',
                             padding: '16px',
-                            borderRight: '1px solid #ccc',
-                            backgroundColor: '#eee',
                         }}
                     >
                         <Heading2>Settings</Heading2>
