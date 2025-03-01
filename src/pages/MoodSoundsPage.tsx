@@ -25,7 +25,7 @@ export const MoodSoundsPage = () => {
                     <Button onClick={() => console.log('button')}>Button</Button>
                     <ItemShopCard
                         heading="Bag of Holding"
-                        itemCost="550 gp"
+                        itemCost={500}
                         tags="Uncommon,Storage,Wearable"
                         imageURL="https://www.dndbeyond.com/avatars/thumbnails/45205/443/1000/1000/638657413430473951.png"
                         style={{ width: '20rem' }}
