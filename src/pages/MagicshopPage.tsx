@@ -12,6 +12,7 @@ import { CartIcon } from '../components/icons/CartIcon'
 import { GlobeIcon } from '../components/icons/GlobeIcon'
 import Modal from '../components/Modal'
 import styled from 'styled-components'
+import { InformationTag } from '../components/InformationTag'
 
 const TagSpacer = styled.span`
     height: 0.25rem;
@@ -87,16 +88,10 @@ export const MagicshopPage = () => {
             <div style={{ marginBottom: '2rem', marginTop: '1.5rem' }}>
                 <GridContainer>
                     <GridItem large={'span 12'}>
-                        <div style={{ display: 'flex', flexDirection: 'row', gap: '2rem', flexWrap: 'wrap' }}>
-                            <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-                                <MapIcon /> {shop.location}
-                            </span>
-                            <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-                                <GlobeIcon /> {shop.opening_hours}
-                            </span>
-                            <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-                                <CartIcon /> {shop.shop_type}
-                            </span>
+                        <div style={{ display: 'flex', flexDirection: 'row', gap: '1rem', flexWrap: 'wrap' }}>
+                            <InformationTag text={shop.location} icon={<MapIcon />} />
+                            <InformationTag text={shop.opening_hours} icon={<GlobeIcon />} />
+                            <InformationTag text={shop.shop_type} icon={<CartIcon />} />
                         </div>
                     </GridItem>
                 </GridContainer>
@@ -129,20 +124,12 @@ export const MagicshopPage = () => {
                             <Heading3 style={{ marginBottom: '0.5rem' }}>{currentItem.name}</Heading3>
                             <div style={{ display: 'flex', flexDirection: 'row' }}>
                                 {currentItem.item_type.split(',').map((tag: string, index: number) => {
-                                    if (index < currentItem.item_type.length - 1) {
-                                        return (
-                                            <SmallText style={{ margin: '0' }} key={index + 2342}>
-                                                {tag}
-                                                <TagSpacer />
-                                            </SmallText>
-                                        )
-                                    } else {
-                                        return (
-                                            <SmallText style={{ margin: '0' }} key={index + 2342}>
-                                                {tag}
-                                            </SmallText>
-                                        )
-                                    }
+                                    return (
+                                        <SmallText style={{ margin: '0' }} key={index + 2342}>
+                                            {tag}
+                                            {index < currentItem.item_type.split(',').length - 1 && <TagSpacer />}
+                                        </SmallText>
+                                    )
                                 })}
                             </div>
                             <Heading4 style={{ marginTop: '1.5rem', marginBottom: '1rem' }}>
