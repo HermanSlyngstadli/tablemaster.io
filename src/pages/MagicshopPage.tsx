@@ -13,6 +13,7 @@ import { GlobeIcon } from '../components/icons/GlobeIcon'
 import Modal from '../components/Modal'
 import styled from 'styled-components'
 import { InformationTag } from '../components/InformationTag'
+import { IconButton } from '../components/IconButton'
 
 const TagSpacer = styled.span`
     height: 0.25rem;
@@ -120,7 +121,13 @@ export const MagicshopPage = () => {
                         <div>
                             <img src={currentItem.image_url} style={{ width: '15rem' }} />
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
+                            <IconButton
+                                onClick={() => setCurrentItem(null)}
+                                style={{ position: 'absolute', right: '0rem', top: '0rem' }}
+                            >
+                                X
+                            </IconButton>
                             <Heading3 style={{ marginBottom: '0.5rem' }}>{currentItem.name}</Heading3>
                             <div style={{ display: 'flex', flexDirection: 'row' }}>
                                 {currentItem.item_type.split(',').map((tag: string, index: number) => {
