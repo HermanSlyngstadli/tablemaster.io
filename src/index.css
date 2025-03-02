@@ -25,5 +25,5 @@ body {
     padding: 0;
     background: var(--page-bg-color);
     height: 100vh;
-    overflow: hidden;
+    width: 100vw;
 }

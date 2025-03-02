@@ -8,7 +8,7 @@ type ComponentTypes = {
     tags: string
     itemCost: number
     imageURL: string | null
-    action?: () => void
+    onClick?: () => void
 }
 
 const StyledCard = styled.div`
@@ -32,7 +32,7 @@ const ImageContainer = styled.div<ImageProps>`
     width: 100%;
     height: 200px;
     background-color: #ede9e9;
-    background-image: url(${(props) => props.src ? props.src : ''});
+    background-image: url(${(props) => (props.src ? props.src : '')});
     background-size: contain;
     background-repeat: no-repeat;
     background-position-x: center;
@@ -52,10 +52,10 @@ const TagSpacer = styled.span`
     display: inline-block;
 `
 
-export const ItemShopCard = ({ style, heading, tags, itemCost, imageURL, action }: ComponentTypes) => {
+export const ItemShopCard = ({ style, heading, tags, itemCost, imageURL, onClick }: ComponentTypes) => {
     const tagText = tags.split(',')
     return (
-        <StyledCard style={style} {...action}>
+        <StyledCard style={style} onClick={onClick}>
             <ImageContainer src={imageURL} />
             <ItemCardContent>
                 <Heading3 style={{ marginBottom: '0.5rem' }}>{heading}</Heading3>
@@ -81,7 +81,7 @@ export const ItemShopCard = ({ style, heading, tags, itemCost, imageURL, action 
                         )
                     }
                 })}
-                <Heading5 style={{ margin: 0 }}>{itemCost}</Heading5>
+                <Heading5 style={{ margin: 0 }}>{itemCost} gp</Heading5>
             </ItemCardContent>
         </StyledCard>
     )

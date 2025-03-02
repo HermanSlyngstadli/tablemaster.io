@@ -18,7 +18,7 @@ const StyledContainer = styled.div<StyledContainerTypes>`
     padding: 0 ${(props: StyledContainerTypes) => props.padding}px;
     max-width: 1600px;
     margin: 0 auto;
-    width: 100%;
+    width: calc(100% - ${(props: StyledContainerTypes) => props.padding * 2}px);
 `
 
 export const GridContainer = ({ children, padding = 24, ...props }: GridContainerProps) => {
