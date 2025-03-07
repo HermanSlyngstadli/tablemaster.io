@@ -33,7 +33,7 @@ const TagSpacer = styled.span`
 
 */
 
-export const MagicshopPage = () => {
+export const ShopPage = () => {
     const { uuid } = useParams<{ uuid: string }>()
     const [items, setItems] = useState<any[]>([]) // State to store items
     const [currentItem, setCurrentItem] = useState<any>() // State to store items

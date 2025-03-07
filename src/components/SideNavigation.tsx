@@ -86,7 +86,7 @@ export const SideNavigation = ({ ...props }) => {
                     <NoteIcon color={'#fff'} size={16} />
                 </NavLink>
 
-                <NavLink href={'/magicshop'}>
+                <NavLink href={'/shop'}>
                     <CartIcon color={'#fff'} size={16} />
                 </NavLink>
             </NavLinkList>

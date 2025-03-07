@@ -30,7 +30,7 @@ const NavCard = styled.a`
     }
 `
 
-export const MagicshopLandingPage = () => {
+export const ShopLandingPage = () => {
     const [shops, setShops] = useState<any[]>([]) // State to store items
     const [loading, setLoading] = useState(true) // Loading state
     const [error, setError] = useState<string | null>(null) // Error state
@@ -63,15 +63,17 @@ export const MagicshopLandingPage = () => {
         <PageContainer>
             <GridContainer>
                 <GridItem large={'span 12'}>
-                    <Heading2 style={{ marginTop: '2rem' }}>Magic Shops</Heading2>
+                    <Heading2 style={{ marginTop: '2rem' }}>Shops</Heading2>
                 </GridItem>
                 <>
                     {shops.map((item) => {
                         return (
                             <GridItem large={'span 3'} small={'span 12'} key={item.id}>
-                                <NavCard href={`/magicshop/${item.id}`}>
+                                <NavCard href={`/shop/${item.id}`}>
                                     <Heading4>{item.name}</Heading4>
-                                    <SmallText>{item.location}</SmallText>
+                                    <SmallText>
+                                        {item.location} | {item.shop_type}
+                                    </SmallText>
                                     <Paragraph style={{ marginBottom: '0' }}>{item.description}</Paragraph>
                                 </NavCard>
                             </GridItem>

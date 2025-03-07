@@ -5,9 +5,9 @@ import { NameGeneratorPage } from './pages/NameGeneratorPage'
 import { MainPage } from './pages/MainPage'
 import { MapGeneratorPage } from './pages/MapGeneratorPage'
 import { MoodSoundsPage } from './pages/MoodSoundsPage'
-import { MagicshopPage } from './pages/MagicshopPage'
 import './index.css'
-import { MagicshopLandingPage } from './pages/MagicShopLandingPage'
+import { ShopLandingPage } from './pages/ShopLandingPage'
+import { ShopPage } from './pages/ShopPage'
 
 const router = createBrowserRouter([
     {
@@ -27,12 +27,12 @@ const router = createBrowserRouter([
         element: <MoodSoundsPage />,
     },
     {
-        path: '/magicshop',
-        element: <MagicshopLandingPage />,
+        path: '/shop',
+        element: <ShopLandingPage />,
     },
     {
-        path: '/magicshop/:uuid',
-        element: <MagicshopPage />,
+        path: '/shop/:uuid',
+        element: <ShopPage />,
     },
 ])
 
