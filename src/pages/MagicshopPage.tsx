@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { PageContainer } from '../components/PageContainer'
 import { GridContainer, GridItem } from '../components/Grid'
 import { getItemsByShop } from '../services/getItemsByShop'
 import { ItemShopCard } from '../components/ItemShopCard'
 import { getShop } from '../services/getShop'
 import ShopBackground from '../assets/shop-bg.png'
-import { Heading1, Heading2, Heading3, Heading4, Paragraph, SmallText } from '../components/Typography'
+import { Heading2, Heading3, Heading4, Paragraph, SmallText } from '../components/Typography'
 import { MapIcon } from '../components/icons/MapIcon'
 import { CartIcon } from '../components/icons/CartIcon'
 import { GlobeIcon } from '../components/icons/GlobeIcon'
@@ -23,6 +22,16 @@ const TagSpacer = styled.span`
     margin: 0.25rem;
     display: inline-block;
 `
+
+/*
+
+    Magic Shop Ids:
+    The Gilded Culdron          – 1ba4e677-34c2-4553-a007-bce5c9e30f51
+    Moonveil Tomes & Scrolls    – 23f8b28e-9575-4186-87ae-51abc65c5d07
+    The Arcane Trinket          – a6e5082a-7ff3-408a-9c4d-4f6806965d5c
+    Runestone Relics            – c072b199-2a44-4b3f-b8ef-d7e4fe145eb1
+
+*/
 
 export const MagicshopPage = () => {
     const { uuid } = useParams<{ uuid: string }>()

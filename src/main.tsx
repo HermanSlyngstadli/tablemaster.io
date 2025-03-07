@@ -7,6 +7,7 @@ import { MapGeneratorPage } from './pages/MapGeneratorPage'
 import { MoodSoundsPage } from './pages/MoodSoundsPage'
 import { MagicshopPage } from './pages/MagicshopPage'
 import './index.css'
+import { MagicshopLandingPage } from './pages/MagicShopLandingPage'
 
 const router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
     {
         path: '/mood-sounds',
         element: <MoodSoundsPage />,
+    },
+    {
+        path: '/magicshop',
+        element: <MagicshopLandingPage />,
     },
     {
         path: '/magicshop/:uuid',
