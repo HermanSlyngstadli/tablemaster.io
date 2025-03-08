@@ -8,7 +8,7 @@ import { ItemShopCard } from '../components/ItemShopCard'
 import { InformationTag } from '../components/InformationTag'
 import { NoteIcon } from '../components/icons/NoteIcon'
 
-export const MoodSoundsPage = () => {
+export const SoundscapePage = () => {
     return (
         <PageContainer>
             <SideNavigation />

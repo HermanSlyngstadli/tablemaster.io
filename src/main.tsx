@@ -4,10 +4,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { NameGeneratorPage } from './pages/NameGeneratorPage'
 import { MainPage } from './pages/MainPage'
 import { MapGeneratorPage } from './pages/MapGeneratorPage'
-import { MoodSoundsPage } from './pages/MoodSoundsPage'
+import { SoundscapePage } from './pages/SoundscapePage'
 import './index.css'
-import { ShopLandingPage } from './pages/ShopLandingPage'
+import { ShopLandingPage } from './pages/MagicShopLandingPage'
 import { ShopPage } from './pages/ShopPage'
+import { ProductPage } from './pages/ProductPage'
 
 const router = createBrowserRouter([
     {
@@ -15,16 +16,20 @@ const router = createBrowserRouter([
         element: <MainPage />,
     },
     {
-        path: '/name-generator',
+        path: '/app',
+        element: <ProductPage />,
+    },
+    {
+        path: '/app/name-generator',
         element: <NameGeneratorPage />,
     },
     {
-        path: '/map-generator',
+        path: '/app/map',
         element: <MapGeneratorPage />,
     },
     {
-        path: '/mood-sounds',
-        element: <MoodSoundsPage />,
+        path: '/app/soundscape',
+        element: <SoundscapePage />,
     },
     {
         path: '/shop',

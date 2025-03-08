@@ -69,7 +69,7 @@ export const ShopLandingPage = () => {
                     {shops.map((item) => {
                         return (
                             <GridItem large={'span 3'} small={'span 12'} key={item.id}>
-                                <NavCard href={`/shop/${item.id}`}>
+                                <NavCard href={`/magicshop/${item.id}`}>
                                     <Heading4>{item.name}</Heading4>
                                     <SmallText>
                                         {item.location} | {item.shop_type}
