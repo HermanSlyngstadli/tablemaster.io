@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import { GridContainer, GridItem } from '../components/Grid'
 import { getAllShops } from '../services/getAllShops'
 import { PageContainer } from '../components/PageContainer'
@@ -69,7 +68,7 @@ export const ShopLandingPage = () => {
                     {shops.map((item) => {
                         return (
                             <GridItem large={'span 3'} small={'span 12'} key={item.id}>
-                                <NavCard href={`/magicshop/${item.id}`}>
+                                <NavCard href={`/shop/${item.id}`}>
                                     <Heading4>{item.name}</Heading4>
                                     <SmallText>
                                         {item.location} | {item.shop_type}

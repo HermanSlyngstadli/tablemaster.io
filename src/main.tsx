@@ -6,9 +6,10 @@ import { MainPage } from './pages/MainPage'
 import { MapGeneratorPage } from './pages/MapGeneratorPage'
 import { SoundscapePage } from './pages/SoundscapePage'
 import './index.css'
-import { ShopLandingPage } from './pages/MagicShopLandingPage'
+import { ShopLandingPage } from './pages/ShopLandingPage'
 import { ShopPage } from './pages/ShopPage'
 import { ProductPage } from './pages/ProductPage'
+import { MakonosMap } from './pages/MakonosMap'
 
 const router = createBrowserRouter([
     {
@@ -16,19 +17,19 @@ const router = createBrowserRouter([
         element: <MainPage />,
     },
     {
-        path: '/app',
+        path: '/',
         element: <ProductPage />,
     },
     {
-        path: '/app/name-generator',
+        path: '/name-generator',
         element: <NameGeneratorPage />,
     },
     {
-        path: '/app/map',
-        element: <MapGeneratorPage />,
+        path: '/map',
+        element: <MakonosMap />,
     },
     {
-        path: '/app/soundscape',
+        path: '/soundscape',
         element: <SoundscapePage />,
     },
     {

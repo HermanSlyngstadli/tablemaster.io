@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import Delaunator from 'delaunator'
 import { nextHalfedge, triangleCenter, triangleOfEdge } from '../delaunayFunctions'
-import { Canvas } from '@react-three/fiber'
-import { OrthographicCamera, Line, OrbitControls } from '@react-three/drei'
+//import { Canvas } from '@react-three/fiber'
+//import { OrthographicCamera, Line, OrbitControls } from '@react-three/drei'
 import { SideNavigation } from '../components/SideNavigation'
 import { BoundingBox } from '../components/BoundingBox'
 import { PageContainer } from '../components/PageContainer'
@@ -15,7 +15,8 @@ const CanvasContainer = styled.div`
 `
 
 export const MapGeneratorPage = () => {
-    const length = 40
+    return <></>
+    /*    const length = 40
     const height = 20
 
     const generateArray = () => {
@@ -92,7 +93,7 @@ export const MapGeneratorPage = () => {
                 </Canvas>
             </CanvasContainer>
         </PageContainer>
-    )
+    )*/
 }
 /*
 {tempTriangles.map((tri) => (

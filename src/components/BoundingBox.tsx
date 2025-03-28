@@ -1,5 +1,5 @@
 import React from 'react'
-import { Line } from '@react-three/drei'
+//import { Line } from '@react-three/drei'
 
 type BoundingBoxType = {
     height: number
@@ -7,6 +7,7 @@ type BoundingBoxType = {
 }
 
 export const BoundingBox = ({ height, length }: BoundingBoxType) => {
+    /*
     return (
         <>
             <Line
@@ -34,5 +35,6 @@ export const BoundingBox = ({ height, length }: BoundingBoxType) => {
                 ]}
             />
         </>
-    )
+    )*/
+    return <></>
 }

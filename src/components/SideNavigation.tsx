@@ -74,7 +74,7 @@ export const SideNavigation = ({ ...props }) => {
                 </NavLink>
             </NavLinkList>
             <NavLinkList>
-                <NavLink href={'/map-generator'}>
+                <NavLink href={'/map'}>
                     <MapIcon color={'#fff'} size={16} />
                 </NavLink>
 
@@ -82,7 +82,7 @@ export const SideNavigation = ({ ...props }) => {
                     <DiceIcon color={'#fff'} size={16} />
                 </NavLink>
 
-                <NavLink href={'/mood-sounds'}>
+                <NavLink href={'/soundscape'}>
                     <NoteIcon color={'#fff'} size={16} />
                 </NavLink>
 

@@ -5,7 +5,7 @@ export const getItemsByShop = async (shopId: string | undefined) => {
     const { data: items, error } = await supabase
         .from('shop_item')
         .select('*')
-        .eq('shop_id', shopId)
+        .eq('shop_id', shopId ?? '')
         .returns<Database['public']['Tables']['shop_item']['Row'][]>()
 
     if (error) {
