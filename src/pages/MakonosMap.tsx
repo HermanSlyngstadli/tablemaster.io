@@ -5,6 +5,7 @@ import L, { CRS, LatLngBounds } from 'leaflet'
 import makonos from '../assets/makonos.png'
 
 import 'leaflet/dist/leaflet.css'
+import { MapMarker } from '../components/MapMarker'
 
 function ClickHandler({ onClick }: { onClick: (latlng: L.LatLng) => void }) {
     useMapEvents({
@@ -69,9 +70,7 @@ export const MakonosMap = () => {
             <ImageOverlay url={makonos} bounds={bounds} />
             <ClickHandler onClick={handleMapClick} />
             {markers.map((marker, index) => (
-                <Marker key={index} position={marker.position}>
-                    <Popup>{marker.text}</Popup>
-                </Marker>
+                <MapMarker key={index} position={marker.position} popupText={marker.text} />
             ))}
         </MapContainer>
     )
