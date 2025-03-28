@@ -6,5 +6,8 @@ export default defineConfig({
     plugins: [react()],
     resolve: {
         extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.vue'],
+        alias: {
+            crypto: 'crypto-browserify',
+        },
     },
 })
