@@ -10,6 +10,8 @@ import { ShopLandingPage } from './pages/ShopLandingPage'
 import { ShopPage } from './pages/ShopPage'
 import { ProductPage } from './pages/ProductPage'
 import { MakonosMap } from './pages/MakonosMap'
+import { AnkrealMap } from './pages/AnkrealMap'
+import { PirateMap } from './pages/PirateMap'
 
 const router = createBrowserRouter([
     {
@@ -25,8 +27,16 @@ const router = createBrowserRouter([
         element: <NameGeneratorPage />,
     },
     {
-        path: '/map',
+        path: '/map/makonos',
         element: <MakonosMap />,
+    },
+    {
+        path: '/map/ankreal',
+        element: <AnkrealMap />,
+    },
+    {
+        path: '/map/pirat',
+        element: <PirateMap />,
     },
     {
         path: '/soundscape',
