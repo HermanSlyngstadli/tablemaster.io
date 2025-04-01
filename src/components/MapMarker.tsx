@@ -13,8 +13,8 @@ export const MapMarker: React.FC<CustomMarkerProps> = ({ position, popupText, ..
     // Create custom icon for the marker
     const customIcon = new L.Icon({
         iconUrl: pin, // Use the provided icon URL
-        iconSize: [40, 50], // Custom size of the icon
-        iconAnchor: [20, 40], // Anchor point at the bottom center
+        iconSize: [25, 30], // Custom size of the icon
+        iconAnchor: [12, 40], // Anchor point at the bottom center
         popupAnchor: [0, -40], // Popup position relative to the icon
     })
 
