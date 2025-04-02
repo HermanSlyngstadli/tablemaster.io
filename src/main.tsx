@@ -12,6 +12,7 @@ import { ProductPage } from './pages/ProductPage'
 import { MakonosMap } from './pages/MakonosMap'
 import { AnkrealMap } from './pages/AnkrealMap'
 import { PirateMap } from './pages/PirateMap'
+import { FantasyMap } from './pages/FantasyMap'
 
 const router = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
     {
         path: '/map/pirat',
         element: <PirateMap />,
+    },
+    {
+        path: '/map/fantasy',
+        element: <FantasyMap />,
     },
     {
         path: '/soundscape',
