@@ -16,7 +16,6 @@
 
 * {
     font-family: 'Alegreya Sans', Arial, sans-serif;
-    color: var(--font-color);
 }
 
 :root,
@@ -24,7 +23,6 @@
 body {
     margin: 0;
     padding: 0;
-    background: var(--page-bg-color);
     height: 100vh;
     width: 100vw;
 }
