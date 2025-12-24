@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 type GridContainerProps = {
-    children: JSX.Element | JSX.Element[]
+    children: React.ReactNode
     padding?: number
 }
 
@@ -30,7 +30,7 @@ export const GridContainer = ({ children, padding = 24, ...props }: GridContaine
 }
 
 type GridItemProps = {
-    children: JSX.Element | JSX.Element[]
+    children: React.ReactNode
     small?: string
     large?: string
     style?: React.CSSProperties

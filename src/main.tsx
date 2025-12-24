@@ -13,6 +13,8 @@ import { MakonosMap } from './pages/MakonosMap'
 import { AnkrealMap } from './pages/AnkrealMap'
 import { PirateMap } from './pages/PirateMap'
 import { FantasyMap } from './pages/FantasyMap'
+import { AdminPage } from './pages/AdminPage'
+import { EditShopPage } from './pages/EditShopPage'
 
 const router = createBrowserRouter([
     {
@@ -54,6 +56,14 @@ const router = createBrowserRouter([
     {
         path: '/shop/:uuid',
         element: <ShopPage />,
+    },
+    {
+        path: '/admin',
+        element: <AdminPage />,
+    },
+    {
+        path: '/admin/shop/:shopId',
+        element: <EditShopPage />,
     },
 ])
 

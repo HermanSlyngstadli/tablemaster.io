@@ -5,9 +5,10 @@ type ButtonTypes = {
     children: React.ReactNode
     onClick: () => void
     style?: React.CSSProperties
+    disabled?: boolean
 }
 
-const StyledButton = styled.button`
+const StyledButton = styled.button<{ disabled?: boolean }>`
     display: inline-flex;
     flex-direction: row;
     justify-content: center;
@@ -19,19 +20,20 @@ const StyledButton = styled.button`
     padding: 0.5rem;
     border: none;
     border-radius: 4px;
-    background-color: #1c0413;
+    background-color: ${(props) => (props.disabled ? '#999' : '#1c0413')};
     color: var(--light-color);
-    cursor: pointer;
+    cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
     gap: 0.5rem;
+    opacity: ${(props) => (props.disabled ? 0.6 : 1)};
 
     &:hover {
-        background-color: var(--dark-color);
+        background-color: ${(props) => (props.disabled ? '#999' : 'var(--dark-color)')};
     }
 `
 
-export const Button = ({ children, onClick, style }: ButtonTypes) => {
+export const Button = ({ children, onClick, style, disabled }: ButtonTypes) => {
     return (
-        <StyledButton onClick={onClick} style={style}>
+        <StyledButton onClick={onClick} style={style} disabled={disabled}>
             {children}
         </StyledButton>
     )
