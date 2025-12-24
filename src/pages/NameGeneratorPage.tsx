@@ -4,9 +4,9 @@ import { RefreshIcon } from '../components/icons/RefreshIcon'
 import { MainContent } from '../components/MainContent'
 import { PageContainer } from '../components/PageContainer'
 import { SideNavigation } from '../components/SideNavigation'
-import { Heading1, Heading2, Label, Paragraph } from '../components/Typography'
 import { generateNames, makeNgrams } from '../markovFunctions'
 import { dyr, monster, names } from '../Names'
+import { Field, Heading, Label, Paragraph, Select, SelectOption } from '@digdir/designsystemet-react'
 
 export const NameGeneratorPage = () => {
     const [currentNames, setCurrentNames] = useState(['No current names...'])
@@ -30,7 +30,7 @@ export const NameGeneratorPage = () => {
         <PageContainer>
             <SideNavigation />
             <MainContent>
-                <Heading1
+                <Heading
                     style={{
                         paddingLeft: '16px',
                         marginBottom: '0',
@@ -40,7 +40,7 @@ export const NameGeneratorPage = () => {
                     }}
                 >
                     Name Generator
-                </Heading1>
+                </Heading>
                 <section style={{ display: 'flex', flexDirection: 'row', flexGrow: '1' }}>
                     <div
                         style={{
@@ -48,25 +48,25 @@ export const NameGeneratorPage = () => {
                             padding: '16px',
                         }}
                     >
-                        <Heading2>Settings</Heading2>
-                        <Label htmlFor="numberOfResults">
-                            Number of names
-                            <select
+                        <Heading data-size="xl" level={2}>
+                            Settings
+                        </Heading>
+                        <Field>
+                            <Label>Number of names</Label>
+                            <Select
                                 name="numberOfResults"
-                                style={{ padding: '12px 8px', width: '100%' }}
                                 value={numberOfNames.value}
                                 onChange={(e) => setNumberOfNames({ value: Number(e.target.value) })}
                             >
-                                <option value={10}>10</option>
-                                <option value={15}>15</option>
-                                <option value={20}>20</option>
-                            </select>
-                        </Label>
-                        <Label htmlFor="lengthOfNames">
-                            Max name length
-                            <select
+                                <SelectOption value={10}>10</SelectOption>
+                                <SelectOption value={15}>15</SelectOption>
+                                <SelectOption value={20}>20</SelectOption>
+                            </Select>
+                        </Field>
+                        <Field>
+                            <Label>Max name length</Label>
+                            <Select
                                 name="lengthOfNames"
-                                style={{ padding: '12px 8px', width: '100%' }}
                                 value={maxNameLength.value}
                                 onChange={(e) => setmaxNameLength({ value: Number(e.target.value) })}
                             >
@@ -76,8 +76,8 @@ export const NameGeneratorPage = () => {
                                 <option value={8}>8</option>
                                 <option value={9}>9</option>
                                 <option value={10}>10</option>
-                            </select>
-                        </Label>
+                            </Select>
+                        </Field>
                         <Button onClick={() => generate()}>
                             <RefreshIcon size={16} color={'#fff'} /> Generate names
                         </Button>
@@ -93,7 +93,7 @@ export const NameGeneratorPage = () => {
                             boxShadow: '0 0 10px #ddd',
                         }}
                     >
-                        <Heading2>Results</Heading2>
+                        <Heading>Results</Heading>
                         <hr />
                         <div>
                             {currentNames.map((name, index) => {

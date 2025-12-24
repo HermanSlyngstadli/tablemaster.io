@@ -1,6 +1,7 @@
 @font-face {
     font-family: 'Alegreya Sans';
     src: local('Alegreya Sans'), url(./fonts/static/AlegreyaSans/AlegreyaSans-Regular.ttf) format('truetype');
+    font-feature-settings: 'cv05' 1; /* Enable lowercase l with tail */
 }
 
 :root {
@@ -26,6 +27,15 @@ body {
     background: var(--page-bg-color);
     height: 100vh;
     width: 100vw;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
 }
 
 /* sizing of map container */

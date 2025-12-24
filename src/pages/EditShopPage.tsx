@@ -9,6 +9,7 @@ import { Button } from '../components/Button'
 import { Heading2, Label, Paragraph } from '../components/Typography'
 import { GridContainer, GridItem } from '../components/Grid'
 import { Database } from '../database-generated.types'
+import { Textfield, Textarea, Field, Input } from '@digdir/designsystemet-react'
 
 const Form = styled.form`
     display: flex;
@@ -16,63 +17,10 @@ const Form = styled.form`
     gap: 1.5rem;
 `
 
-const Input = styled.input`
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 1rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-    font-family: 'Alegreya Sans', Arial, sans-serif;
-
-    &:focus {
-        outline: none;
-        border-color: var(--dark-color);
-    }
-`
-
-const TextArea = styled.textarea`
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 1rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-    font-family: 'Alegreya Sans', Arial, sans-serif;
-    min-height: 100px;
-    resize: vertical;
-
-    &:focus {
-        outline: none;
-        border-color: var(--dark-color);
-    }
-`
-
 const ButtonGroup = styled.div`
     display: flex;
     gap: 1rem;
     margin-top: 1rem;
-`
-
-const StyledButton = styled.button<{ disabled?: boolean }>`
-    display: inline-flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.25rem;
-    font-weight: 700;
-    letter-spacing: 0.1rem;
-    line-height: 100%;
-    padding: 0.5rem;
-    border: none;
-    border-radius: 4px;
-    background-color: ${(props) => (props.disabled ? '#999' : '#1c0413')};
-    color: var(--light-color);
-    cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
-    gap: 0.5rem;
-    opacity: ${(props) => (props.disabled ? 0.6 : 1)};
-
-    &:hover {
-        background-color: ${(props) => (props.disabled ? '#999' : 'var(--dark-color)')};
-    }
 `
 
 const FormCard = styled.div`
@@ -219,69 +167,66 @@ export const EditShopPage = () => {
                 <GridItem large="span 8" small="span 12">
                     <FormCard>
                         <Form onSubmit={handleSubmit}>
-                            <div>
-                                <Label htmlFor="name">Name</Label>
-                                <Input
+                            <Field>
+                                <Textfield
+                                    label="Name"
                                     id="name"
                                     name="name"
-                                    type="text"
                                     value={formData.name}
-                                    onChange={handleChange}
+                                    onChange={(e) => handleChange(e as any)}
                                     placeholder="Shop name"
                                 />
-                            </div>
+                            </Field>
 
-                            <div>
-                                <Label htmlFor="location">Location</Label>
-                                <Input
+                            <Field>
+                                <Textfield
+                                    label="Location"
                                     id="location"
                                     name="location"
-                                    type="text"
                                     value={formData.location}
-                                    onChange={handleChange}
+                                    onChange={(e) => handleChange(e as any)}
                                     placeholder="Shop location"
                                 />
-                            </div>
+                            </Field>
 
-                            <div>
-                                <Label htmlFor="shop_type">Shop Type</Label>
-                                <Input
+                            <Field>
+                                <Textfield
+                                    label="Shop Type"
                                     id="shop_type"
                                     name="shop_type"
-                                    type="text"
                                     value={formData.shop_type}
-                                    onChange={handleChange}
+                                    onChange={(e) => handleChange(e as any)}
                                     placeholder="e.g., Magic Shop, General Store"
                                 />
-                            </div>
+                            </Field>
 
-                            <div>
+                            <Field>
                                 <Label htmlFor="description">Description</Label>
-                                <TextArea
+                                <Textarea
                                     id="description"
                                     name="description"
                                     value={formData.description}
-                                    onChange={handleChange}
+                                    onChange={(e) => handleChange(e as any)}
                                     placeholder="Shop description"
+                                    rows={4}
                                 />
-                            </div>
+                            </Field>
 
-                            <div>
-                                <Label htmlFor="opening_hours">Opening Hours</Label>
-                                <Input
+                            <Field>
+                                <Textfield
+                                    label="Opening Hours"
                                     id="opening_hours"
                                     name="opening_hours"
-                                    type="text"
                                     value={formData.opening_hours}
-                                    onChange={handleChange}
+                                    onChange={(e) => handleChange(e as any)}
                                     placeholder="e.g., 9:00 AM - 6:00 PM"
                                 />
-                            </div>
+                            </Field>
 
                             {error && <Paragraph style={{ color: 'red' }}>{error}</Paragraph>}
 
                             <ButtonGroup>
-                                <StyledButton type="submit" disabled={saving}>
+                                <Button disabled={saving} type="submit">
                                     {saving
                                         ? isNewShop
                                             ? 'Creating...'
@@ -289,8 +234,8 @@ export const EditShopPage = () => {
                                         : isNewShop
                                         ? 'Create Shop'
                                         : 'Save Changes'}
-                                </StyledButton>
-                                <Button onClick={() => navigate('/admin')} style={{ backgroundColor: '#666' }}>
+                                </Button>
+                                <Button onClick={() => navigate('/admin')} variant="secondary">
                                     Cancel
                                 </Button>
                             </ButtonGroup>

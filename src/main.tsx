@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import '@digdir/designsystemet-css'
+import './design-tokens-build/tablemaster.css'
 import { NameGeneratorPage } from './pages/NameGeneratorPage'
 import { MainPage } from './pages/MainPage'
 import { MapGeneratorPage } from './pages/MapGeneratorPage'
@@ -15,6 +17,8 @@ import { PirateMap } from './pages/PirateMap'
 import { FantasyMap } from './pages/FantasyMap'
 import { AdminPage } from './pages/AdminPage'
 import { EditShopPage } from './pages/EditShopPage'
+import { ShopViewPage } from './pages/ShopViewPage'
+import { EditItemPage } from './pages/EditItemPage'
 
 const router = createBrowserRouter([
     {
@@ -62,8 +66,20 @@ const router = createBrowserRouter([
         element: <AdminPage />,
     },
     {
-        path: '/admin/shop/:shopId',
+        path: '/admin/shop/new',
         element: <EditShopPage />,
+    },
+    {
+        path: '/admin/shop/:shopId/edit',
+        element: <EditShopPage />,
+    },
+    {
+        path: '/admin/shop/:shopId',
+        element: <ShopViewPage />,
+    },
+    {
+        path: '/admin/shop/:shopId/item/:itemId',
+        element: <EditItemPage />,
     },
 ])
 

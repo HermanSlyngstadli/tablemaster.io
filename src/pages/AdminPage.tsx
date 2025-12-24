@@ -7,63 +7,23 @@ import { Heading2, Paragraph, SmallText } from '../components/Typography'
 import { GridContainer, GridItem } from '../components/Grid'
 import { Database } from '../database-generated.types'
 import { Button } from '../components/Button'
+import { Table } from '@digdir/designsystemet-react'
 
-const Table = styled.table`
-    width: 100%;
-    border-collapse: collapse;
-    background-color: var(--panel-bg-color);
-    border-radius: var(--panel-border-radius);
-    overflow: hidden;
-    box-shadow: var(--box-shadow-default);
-`
-
-const TableHeader = styled.thead`
-    background-color: var(--dark-color);
-    color: var(--light-color);
-`
-
-const TableHeaderCell = styled.th`
-    padding: 1rem;
-    text-align: left;
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--light-color);
-`
-
-const TableBody = styled.tbody``
-
-const TableRow = styled.tr`
+const StyledTableRow = styled(Table.Row)`
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
-    border-bottom: 1px solid #e0e0e0;
 
     &:hover {
         background-color: #f5f5f5;
     }
-
-    &:last-child {
-        border-bottom: none;
-    }
 `
 
-const TableCell = styled.td`
-    padding: 1rem;
-    font-size: 1rem;
-`
-
-const IdCell = styled(TableCell)`
+const IdCell = styled(Table.Cell)`
     font-family: monospace;
     font-size: 0.875rem;
     color: #666;
     word-break: break-all;
     max-width: 200px;
-`
-
-const HeaderSection = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
 `
 
 type Shop = Database['public']['Tables']['shop']['Row']
@@ -115,7 +75,7 @@ export const AdminPage = () => {
         <PageContainer>
             <GridContainer>
                 <GridItem large="span 12">
-                    <HeaderSection style={{ marginTop: '2rem' }}>
+                    <div style={{ marginTop: '2rem' }}>
                         <div>
                             <Heading2 style={{ marginBottom: '0.5rem' }}>Admin - All Shops</Heading2>
                             <SmallText>
@@ -123,7 +83,7 @@ export const AdminPage = () => {
                             </SmallText>
                         </div>
                         <Button onClick={() => navigate('/admin/shop/new')}>+ New Shop</Button>
-                    </HeaderSection>
+                    </div>
                 </GridItem>
 
                 {shops.length === 0 ? (
@@ -132,29 +92,29 @@ export const AdminPage = () => {
                     </GridItem>
                 ) : (
                     <GridItem large="span 12">
-                        <Table>
-                            <TableHeader>
-                                <tr>
-                                    <TableHeaderCell>Name</TableHeaderCell>
-                                    <TableHeaderCell>Location</TableHeaderCell>
-                                    <TableHeaderCell>Type</TableHeaderCell>
-                                    <TableHeaderCell>Description</TableHeaderCell>
-                                    <TableHeaderCell>Opening Hours</TableHeaderCell>
-                                    <TableHeaderCell>ID</TableHeaderCell>
-                                </tr>
-                            </TableHeader>
-                            <TableBody>
+                        <Table hover border>
+                            <Table.Head>
+                                <Table.Row>
+                                    <Table.HeaderCell>Name</Table.HeaderCell>
+                                    <Table.HeaderCell>Location</Table.HeaderCell>
+                                    <Table.HeaderCell>Type</Table.HeaderCell>
+                                    <Table.HeaderCell>Description</Table.HeaderCell>
+                                    <Table.HeaderCell>Opening Hours</Table.HeaderCell>
+                                    <Table.HeaderCell>ID</Table.HeaderCell>
+                                </Table.Row>
+                            </Table.Head>
+                            <Table.Body>
                                 {shops.map((shop) => (
-                                    <TableRow key={shop.id} onClick={() => handleRowClick(shop.id)}>
-                                        <TableCell>{shop.name || 'Unnamed Shop'}</TableCell>
-                                        <TableCell>{shop.location || '-'}</TableCell>
-                                        <TableCell>{shop.shop_type || '-'}</TableCell>
-                                        <TableCell>{shop.description || '-'}</TableCell>
-                                        <TableCell>{shop.opening_hours || '-'}</TableCell>
+                                    <StyledTableRow key={shop.id} onClick={() => handleRowClick(shop.id)}>
+                                        <Table.Cell>{shop.name || 'Unnamed Shop'}</Table.Cell>
+                                        <Table.Cell>{shop.location || '-'}</Table.Cell>
+                                        <Table.Cell>{shop.shop_type || '-'}</Table.Cell>
+                                        <Table.Cell>{shop.description || '-'}</Table.Cell>
+                                        <Table.Cell>{shop.opening_hours || '-'}</Table.Cell>
                                         <IdCell>{shop.id}</IdCell>
-                                    </TableRow>
+                                    </StyledTableRow>
                                 ))}
-                            </TableBody>
+                            </Table.Body>
                         </Table>
                     </GridItem>
                 )}

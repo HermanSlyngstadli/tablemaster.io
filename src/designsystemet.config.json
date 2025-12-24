@@ -1,0 +1,23 @@
+{
+    "$schema": "node_modules/@digdir/designsystemet/dist/config.schema.json",
+    "outDir": "./design-tokens",
+    "themes": {
+        "tablemaster": {
+            "colors": {
+                "main": {
+                    "primary": "#1C0413"
+                },
+                "neutral": "#5A434E"
+            },
+            "overrides": {
+                "severity": {
+                    "info": "#1172bd",
+                    "success": "#269d36",
+                    "warning": "#e39d2a",
+                    "danger": "#a42828"
+                }
+            },
+            "borderRadius": 8
+        }
+    }
+}
