@@ -141,9 +141,7 @@ export const ShopViewPage = () => {
                             <Button onClick={() => navigate('/admin')} variant="secondary">
                                 Back
                             </Button>
-                            <Button onClick={() => navigate(`/admin/shop/${shopId}/edit`)}>
-                                Edit Shop
-                            </Button>
+                            <Button onClick={() => navigate(`/admin/shop/${shopId}/edit`)}>Edit Shop</Button>
                         </div>
                     </HeaderSection>
                 </GridItem>
@@ -151,7 +149,7 @@ export const ShopViewPage = () => {
                 <GridItem large="span 6" small="span 12">
                     <InfoCard>
                         <Heading3 style={{ marginBottom: '1.5rem' }}>Shop Information</Heading3>
-                        
+
                         {shop.location && (
                             <InfoRow>
                                 <InfoLabel>Location</InfoLabel>
@@ -197,11 +195,16 @@ export const ShopViewPage = () => {
 
                 <GridItem large="span 12">
                     <Card style={{ padding: '1.5rem' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                marginBottom: '1.5rem',
+                            }}
+                        >
                             <Heading3 style={{ margin: 0 }}>Items List</Heading3>
-                            <Button onClick={() => navigate(`/admin/shop/${shopId}/item/new`)}>
-                                + New Item
-                            </Button>
+                            <Button onClick={() => navigate(`/admin/shop/${shopId}/item/new`)}>+ New Item</Button>
                         </div>
                         {items.length > 0 ? (
                             <Table hover border>
@@ -241,17 +244,13 @@ export const ShopViewPage = () => {
                                                 )}
                                             </Table.Cell>
                                             <Table.Cell>
-                                                <Heading4 style={{ margin: 0, fontSize: '1rem' }}>
-                                                    {item.name}
-                                                </Heading4>
+                                                <Heading4 style={{ margin: 0, fontSize: '1rem' }}>{item.name}</Heading4>
                                             </Table.Cell>
                                             <Table.Cell>
                                                 <SmallText style={{ margin: 0 }}>{item.item_type}</SmallText>
                                             </Table.Cell>
                                             <Table.Cell>
-                                                <SmallText style={{ margin: 0 }}>
-                                                    {item.short_description}
-                                                </SmallText>
+                                                <SmallText style={{ margin: 0 }}>{item.short_description}</SmallText>
                                             </Table.Cell>
                                             <Table.Cell>
                                                 <SmallText style={{ margin: 0, fontWeight: 700 }}>
@@ -260,12 +259,15 @@ export const ShopViewPage = () => {
                                             </Table.Cell>
                                             <Table.Cell>
                                                 {item.sold && <SoldBadge>SOLD</SoldBadge>}
-                                                {!item.sold && <SmallText style={{ margin: 0, color: '#269d36' }}>Available</SmallText>}
+                                                {!item.sold && (
+                                                    <SmallText style={{ margin: 0, color: '#269d36' }}>
+                                                        Available
+                                                    </SmallText>
+                                                )}
                                             </Table.Cell>
                                             <Table.Cell>
                                                 <IconButton
-                                                    onClick={(e) => {
-                                                        e.stopPropagation()
+                                                    onClick={() => {
                                                         navigate(`/admin/shop/${shopId}/item/${item.id}`)
                                                     }}
                                                 >
@@ -285,4 +287,3 @@ export const ShopViewPage = () => {
         </PageContainer>
     )
 }
-
