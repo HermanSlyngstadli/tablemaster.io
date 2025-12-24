@@ -45,11 +45,6 @@ npm install
 
 Create a `.env.development` file in the root directory:
 
-```env
-VITE_SUPABASE_PROJECT_URL=http://127.0.0.1:54321
-VITE_SUPABASE_ANONYMOUS_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0
-```
-
 For production, create `.env.production` with your production Supabase credentials.
 
 ### 4. Set Up Local Supabase (Optional)
