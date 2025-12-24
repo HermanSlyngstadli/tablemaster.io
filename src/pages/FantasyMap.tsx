@@ -6,7 +6,7 @@ import { createNoise2D } from 'simplex-noise'
 
 const WIDTH = 1200
 const HEIGHT = 800
-const NUM_POINTS = 10000 // More points = more detail
+const NUM_POINTS = 5000 // More points = more detail
 
 const generatePoints = (num: number): [number, number][] =>
     Array.from({ length: num }, () => [Math.random() * WIDTH, Math.random() * HEIGHT] as [number, number])
@@ -77,16 +77,20 @@ const getElevation = ([x, y]: [number, number]) => {
     return elevation
 }
 
-const classifyTerrain = (elevation: number): string => {
-    if (elevation < -1.2) return '#28527a' // Deep ocean
-    if (elevation < -0.8) return '#64a6bd' // Shallow water
-    if (elevation < -0.3) return '#4c9a2a' // Grasslands
-    if (elevation < 0.1) return '#94724e' // Hills
+const riverSources: [number, number][] = []
+
+const classifyTerrain = (x: number, y: number, elevation: number): string => {
+    if (elevation < -1.3) return '#28527a' // Deep ocean
+    if (elevation < -0.9) return '#64a6bd' // Shallow water
+    if (elevation < -0.88) return '#f4e8a3' // Sand / Beach
+    if (elevation < -0.1) return '#4c9a2a' // Grasslands
+    if (elevation < 0.2) return '#94724e' // Hills
+    riverSources.push([x, y]) // Store mountains as river sources
     return '#aaaaaa' // Mountains
 }
 
 export const FantasyMap = () => {
-    const [polygons, setPolygons] = useState<{ coords: L.LatLngTuple[][]; elevation: number; color: string }[]>([])
+    const [polygons, setPolygons] = useState<{ coords: L.LatLngTuple[][]; isLand: boolean; color: string }[]>([])
 
     useEffect(() => {
         let points = generatePoints(NUM_POINTS)
@@ -94,28 +98,23 @@ export const FantasyMap = () => {
         points = lloydRelaxation(points, 5)
 
         const voronoi = generateVoronoi(points)
-
         let newPolygons = []
-        for (let i = 0; i < points.length; i++) {
-            let cell = voronoi.cellPolygon(i)
-            if (cell) {
-                cell = perturbEdges(cell) // Add jagged coastlines
 
-                const elevation = getElevation(points[i])
-                newPolygons.push({
-                    coords: [cell.map(([x, y]) => [y, x] as [number, number])],
-                    elevation,
-                })
-            }
+        for (let i = 0; i < points.length; i++) {
+            const cell = voronoi.cellPolygon(i)
+            if (!cell || cell.length < 3) continue // Ensure valid polygons
+
+            const [x, y] = points[i] // Extract coordinates
+            const elevation = getElevation([x, y])
+
+            newPolygons.push({
+                coords: [cell.map(([px, py]) => [py, px] as L.LatLngTuple)], // Wrap in an array to make it LatLngTuple[][]
+                isLand: elevation > 0,
+                color: classifyTerrain(x, y, elevation), // Pass (x, y)
+            })
         }
 
-        // Detect lakes and classify terrain
-        newPolygons = newPolygons.map((poly, i) => ({
-            ...poly,
-            color: classifyTerrain(poly.elevation),
-        }))
-
-        setPolygons(newPolygons)
+        setPolygons(newPolygons) // Now matches expected type
     }, [])
 
     return (
