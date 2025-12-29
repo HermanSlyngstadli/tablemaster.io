@@ -1,9 +1,9 @@
 import React from 'react'
 import { GridContainer, GridItem } from '../components/Grid'
-import { NavigationCard } from '../components/NavigationCard'
 import { PageContainer } from '../components/PageContainer'
 import { MapIcon } from '../components/icons/MapIcon'
 import { SideNavigation } from '../components/SideNavigation'
+import { Card, Heading } from '@digdir/designsystemet-react'
 
 export const MainPage = () => {
     return (
@@ -11,10 +11,14 @@ export const MainPage = () => {
             <SideNavigation />
             <GridContainer>
                 <GridItem large={'span 4'} small={'span 12'}>
-                    <NavigationCard href={'/shop'}>
-                        <MapIcon />
-                        Shops
-                    </NavigationCard>
+                    <Card asChild>
+                        <a href={'/shop'}>
+                            <Heading level={2} data-size="xs">
+                                <MapIcon />
+                                Shops
+                            </Heading>
+                        </a>
+                    </Card>
                 </GridItem>
             </GridContainer>
         </PageContainer>

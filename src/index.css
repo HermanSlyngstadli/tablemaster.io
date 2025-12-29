@@ -6,12 +6,24 @@
 
 :root {
     --panel-border-radius: 1rem;
-    --panel-bg-color: #ffffff;
-    --page-bg-color: #fbfafa;
-    --light-color: #fbfafa;
-    --dark-color: #4b1939;
-    --font-color: #1c0413;
+    /* Map custom properties to Designsystemet tokens */
+    --panel-bg-color: var(--ds-color-surface-default);
+    --page-bg-color: var(--ds-color-background-tinted);
+    --light-color: var(--ds-color-background-tinted);
+    --dark-color: var(--ds-color-base-default);
+    --font-color: var(--ds-color-text-default);
     --box-shadow-default: 0 0 1rem rgba(189, 195, 199, 0.2);
+}
+
+/* Dark mode box shadow - tokens handle colors automatically */
+[data-color-scheme="dark"] {
+    --box-shadow-default: 0 0 1rem rgba(0, 0, 0, 0.4);
+}
+
+@media (prefers-color-scheme: dark) {
+    [data-color-scheme="auto"] {
+        --box-shadow-default: 0 0 1rem rgba(0, 0, 0, 0.4);
+    }
 }
 
 * {

@@ -1,23 +1,22 @@
 import React from 'react'
-import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
+import { Button } from '@digdir/designsystemet-react'
 import { ArrowLeftIcon } from './icons/ArrowLeftIcon'
+import styled from 'styled-components'
 
-const StyledBackButton = styled.a`
-    display: flex;
-    align-items: center;
-    padding: 0.75rem 0.25rem;
-    border-radius: var(--panel-border-radius);
-    gap: 0.25rem;
+type BackButtonProps = {
+    to?: string
+    children?: React.ReactNode
+    style?: React.CSSProperties
+}
 
-    &:hover {
-        background: #bdc3c7;
-    }
-`
+export const BackButton = ({ to = '/shop', children, style, ...props }: BackButtonProps) => {
+    const navigate = useNavigate()
 
-export const BackButton = ({ ...props }) => {
     return (
-        <StyledBackButton href="/" {...props}>
-            <ArrowLeftIcon /> Tilbake til oversikten
-        </StyledBackButton>
+        <Button variant="tertiary" onClick={() => navigate(to)} style={style} {...props}>
+            <ArrowLeftIcon />
+            {children || 'Back'}
+        </Button>
     )
 }

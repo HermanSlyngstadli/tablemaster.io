@@ -4,7 +4,6 @@ import { GridContainer, GridItem } from '../components/Grid'
 import { getItemsByShop } from '../services/getItemsByShop'
 import { ItemShopCard } from '../components/ItemShopCard'
 import { getShop } from '../services/getShop'
-import ShopBackground from '../assets/shop-bg.png'
 import { Heading2, Heading3, Heading4, Paragraph, SmallText } from '../components/Typography'
 import { MapIcon } from '../components/icons/MapIcon'
 import { CartIcon } from '../components/icons/CartIcon'
@@ -12,15 +11,27 @@ import { GlobeIcon } from '../components/icons/GlobeIcon'
 import Modal from '../components/Modal'
 import styled from 'styled-components'
 import { InformationTag } from '../components/InformationTag'
-import { IconButton } from '../components/IconButton'
+import { BackButton } from '../components/BackButton'
 
 const TagSpacer = styled.span`
     height: 0.25rem;
     width: 0.25rem;
-    background-color: #000;
+    background-color: var(--ds-color-text-default);
     border-radius: 50%;
     margin: 0.25rem;
     display: inline-block;
+`
+
+const ShopHeader = styled.div`
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--ds-color-border-subtle);
+`
+
+const ShopHeaderContent = styled.div`
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
 `
 
 /*
@@ -80,32 +91,20 @@ export const ShopPage = () => {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', flexGrow: '1' }}>
-            <div
-                style={{
-                    backgroundImage: `url(${ShopBackground})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    padding: '2rem 0',
-                }}
-            >
-                <GridContainer>
-                    <GridItem large={'span 12'}>
-                        <Heading2 style={{ marginTop: '1rem', marginBottom: '1rem' }}>{shop.name}</Heading2>
-                        <Heading4 style={{ marginBottom: '3rem' }}>{shop.description}</Heading4>
-                    </GridItem>
-                </GridContainer>
-            </div>
-            <div style={{ marginBottom: '2rem', marginTop: '1.5rem' }}>
-                <GridContainer>
-                    <GridItem large={'span 12'}>
-                        <div style={{ display: 'flex', flexDirection: 'row', gap: '1rem', flexWrap: 'wrap' }}>
-                            <InformationTag text={shop.location} icon={<MapIcon />} />
-                            <InformationTag text={shop.opening_hours} icon={<GlobeIcon />} />
-                            <InformationTag text={shop.shop_type} icon={<CartIcon />} />
-                        </div>
-                    </GridItem>
-                </GridContainer>
-            </div>
+            <ShopHeader>
+                <ShopHeaderContent>
+                    <BackButton to={'/shop/'} style={{ marginBottom: '1.5rem' }}></BackButton>
+                    <Heading2 style={{ marginBottom: '1rem' }}>{shop.name}</Heading2>
+                    <Heading4 style={{ marginBottom: '2rem', color: 'var(--ds-color-text-subtle)' }}>
+                        {shop.description}
+                    </Heading4>
+                    <div style={{ display: 'flex', flexDirection: 'row', gap: '1rem', flexWrap: 'wrap' }}>
+                        <InformationTag text={shop.location} icon={<MapIcon />} />
+                        <InformationTag text={shop.opening_hours} icon={<GlobeIcon />} />
+                        <InformationTag text={shop.shop_type} icon={<CartIcon />} />
+                    </div>
+                </ShopHeaderContent>
+            </ShopHeader>
             <GridContainer>
                 <GridItem large={'span 12'}>
                     <Heading3>Items</Heading3>

@@ -13,7 +13,8 @@ const StyledInformationTag = styled.span`
     padding: 0.25rem 0.5rem;
     border-radius: 0.25rem;
     gap: 0.25rem;
-    background-color: #ede9e9;
+    background-color: var(--ds-color-surface-tinted);
+    color: var(--ds-color-text-default);
 `
 
 export const InformationTag = ({ icon, text, ...props }: InformationTagTypes) => {

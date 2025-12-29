@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Card } from '@digdir/designsystemet-react'
 import { Heading3, Heading5, SmallText } from './Typography'
 
 type ComponentTypes = {
@@ -11,18 +12,16 @@ type ComponentTypes = {
     onClick?: () => void
 }
 
-const StyledCard = styled.div`
-    border-radius: 1rem;
+const StyledCard = styled(Card)`
     overflow: hidden;
-    border: 1px solid #e0e0e0;
     cursor: pointer;
     transition: all 0.3s;
+    padding: 0;
     img {
         width: 100%;
     }
     &:hover {
-        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-        border-color: #4b1939;
+        box-shadow: var(--box-shadow-default);
     }
 `
 interface ImageProps {
@@ -31,7 +30,7 @@ interface ImageProps {
 const ImageContainer = styled.div<ImageProps>`
     width: 100%;
     height: 200px;
-    background-color: #ede9e9;
+    background-color: var(--ds-color-surface-tinted);
     background-image: url(${(props) => (props.src ? props.src : '')});
     background-size: contain;
     background-repeat: no-repeat;
@@ -46,7 +45,7 @@ const ItemCardContent = styled.div`
 const TagSpacer = styled.span`
     height: 0.25rem;
     width: 0.25rem;
-    background-color: #000;
+    background-color: var(--ds-color-text-default);
     border-radius: 50%;
     margin: 0.25rem;
     display: inline-block;

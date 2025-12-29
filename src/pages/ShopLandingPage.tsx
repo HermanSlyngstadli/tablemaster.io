@@ -3,6 +3,7 @@ import { GridContainer, GridItem } from '../components/Grid'
 import { getAllShops } from '../services/getAllShops'
 import { PageContainer } from '../components/PageContainer'
 import { Heading2, Heading4, Paragraph, SmallText } from '../components/Typography'
+import { Card } from '@digdir/designsystemet-react'
 import styled from 'styled-components'
 
 /*
@@ -15,15 +16,12 @@ import styled from 'styled-components'
 
 */
 
-const NavCard = styled.a`
+const NavCard = styled(Card)`
     display: block;
-    background-color: #fff;
-    border-radius: 8px;
     padding: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.2s ease-in-out;
     text-decoration: none;
-    color: inherit;
+    color: var(--ds-color-text-default);
+    transition: box-shadow 0.2s ease-in-out;
     &:hover {
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
@@ -68,13 +66,15 @@ export const ShopLandingPage = () => {
                     {shops.map((item) => {
                         return (
                             <GridItem large={'span 3'} small={'span 12'} key={item.id}>
-                                <NavCard href={`/shop/${item.id}`}>
-                                    <Heading4>{item.name}</Heading4>
-                                    <SmallText>
-                                        {item.location} | {item.shop_type}
-                                    </SmallText>
-                                    <Paragraph style={{ marginBottom: '0' }}>{item.description}</Paragraph>
-                                </NavCard>
+                                <Card asChild>
+                                    <a href={`/shop/${item.id}`}>
+                                        <Heading4>{item.name}</Heading4>
+                                        <SmallText>
+                                            {item.location} | {item.shop_type}
+                                        </SmallText>
+                                        <Paragraph style={{ marginBottom: '0' }}>{item.description}</Paragraph>
+                                    </a>
+                                </Card>
                             </GridItem>
                         )
                     })}

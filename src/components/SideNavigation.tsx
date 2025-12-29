@@ -5,7 +5,9 @@ import { DiceIcon } from './icons/DiceIcon'
 import { HomeIcon } from './icons/HomeIcon'
 import { MapIcon } from './icons/MapIcon'
 import { NoteIcon } from './icons/NoteIcon'
+import { ThemeIcon, MoonIcon } from './icons/ThemeIcon'
 import { supabase } from '../supabaseClient'
+import { useTheme } from '../contexts/ThemeContext'
 
 const NavContainer = styled.nav`
     height: 100vh;
@@ -36,7 +38,36 @@ const NavLink = styled.a`
     }
 `
 
+const ThemeButton = styled.button`
+    display: flex;
+    height: 36px;
+    width: 36px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    &:hover {
+        background: #592f57;
+    }
+`
+
 export const SideNavigation = ({ ...props }) => {
+    const { colorScheme, setColorScheme, isDark } = useTheme()
+
+    const toggleTheme = () => {
+        if (colorScheme === 'light') {
+            setColorScheme('dark')
+        } else if (colorScheme === 'dark') {
+            setColorScheme('auto')
+        } else {
+            setColorScheme('light')
+        }
+    }
+
     /*
     const [session, setSession] = useState<any>()
     const [profileImageURL, setProfileImageURL] = useState<string>()
@@ -89,6 +120,15 @@ export const SideNavigation = ({ ...props }) => {
                 <NavLink href={'/shop'}>
                     <CartIcon color={'#fff'} size={16} />
                 </NavLink>
+            </NavLinkList>
+            <NavLinkList>
+                <ThemeButton onClick={toggleTheme} title="Toggle theme">
+                    {isDark ? (
+                        <MoonIcon color={'#fff'} size={16} />
+                    ) : (
+                        <ThemeIcon color={'#fff'} size={16} />
+                    )}
+                </ThemeButton>
             </NavLinkList>
         </NavContainer>
     )
