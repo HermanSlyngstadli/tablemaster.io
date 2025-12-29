@@ -268,7 +268,7 @@ export const ShopViewPage = () => {
                                             <Table.Cell>
                                                 <IconButton
                                                     onClick={() => {
-                                                        navigate(`/admin/shop/${shopId}/item/${item.id}`)
+                                                        navigate(`/admin/shop/${shopId}/item/${item.id}/edit`)
                                                     }}
                                                 >
                                                     <EditIcon size={20} color="#1c0413" />
