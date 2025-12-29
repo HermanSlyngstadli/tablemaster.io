@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import { getShop } from '../services/getShop'
 import { updateShop } from '../services/updateShop'
@@ -33,13 +33,15 @@ const FormCard = styled.div`
 type Shop = Database['public']['Tables']['shop']['Row']
 
 export const EditShopPage = () => {
-    const { shopId } = useParams<{ shopId: string }>()
+    const { shopId } = useParams<{ shopId?: string }>()
+    const location = useLocation()
     const navigate = useNavigate()
     const [shop, setShop] = useState<Shop | null>(null)
     const [loading, setLoading] = useState(true)
     const [saving, setSaving] = useState(false)
     const [error, setError] = useState<string | null>(null)
-    const isNewShop = shopId === 'new'
+    // Check if we're on the /admin/shop/new route or if shopId is 'new'
+    const isNewShop = location.pathname === '/admin/shop/new' || shopId === 'new'
 
     const [formData, setFormData] = useState({
         name: '',
@@ -119,8 +121,15 @@ export const EditShopPage = () => {
                 })
             }
             navigate('/admin')
-        } catch (err) {
-            setError(isNewShop ? 'Failed to create shop' : 'Failed to update shop')
+        } catch (err: any) {
+            // Provide more specific error messages
+            if (err?.message?.includes('row-level security')) {
+                setError(
+                    'Permission denied: You must be logged in to create or edit shops. Please refresh the page and try again.'
+                )
+            } else {
+                setError(isNewShop ? 'Failed to create shop' : 'Failed to update shop')
+            }
             console.error(err)
         } finally {
             setSaving(false)

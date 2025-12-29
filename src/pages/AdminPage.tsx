@@ -8,6 +8,7 @@ import { GridContainer, GridItem } from '../components/Grid'
 import { Database } from '../database-generated.types'
 import { Button } from '../components/Button'
 import { Table } from '@digdir/designsystemet-react'
+import { useAuth } from '../contexts/AuthContext'
 
 const StyledTableRow = styled(Table.Row)`
     cursor: pointer;
@@ -28,11 +29,30 @@ const IdCell = styled(Table.Cell)`
 
 type Shop = Database['public']['Tables']['shop']['Row']
 
+const HeaderSection = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+`
+
+const UserInfo = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+`
+
 export const AdminPage = () => {
     const [shops, setShops] = useState<Shop[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
     const navigate = useNavigate()
+    const { user, signOut } = useAuth()
+
+    const handleLogout = async () => {
+        await signOut()
+        navigate('/admin/login')
+    }
 
     useEffect(() => {
         const fetchShops = async () => {
@@ -76,13 +96,25 @@ export const AdminPage = () => {
             <GridContainer>
                 <GridItem large="span 12">
                     <div style={{ marginTop: '2rem' }}>
-                        <div>
-                            <Heading2 style={{ marginBottom: '0.5rem' }}>Admin - All Shops</Heading2>
-                            <SmallText>
-                                Total: {shops.length} shop{shops.length !== 1 ? 's' : ''}
-                            </SmallText>
-                        </div>
-                        <Button onClick={() => navigate('/admin/shop/new')}>+ New Shop</Button>
+                        <HeaderSection>
+                            <div>
+                                <Heading2 style={{ marginBottom: '0.5rem' }}>Admin - All Shops</Heading2>
+                                <SmallText>
+                                    Total: {shops.length} shop{shops.length !== 1 ? 's' : ''}
+                                </SmallText>
+                                {user && (
+                                    <SmallText style={{ display: 'block', marginTop: '0.5rem', color: '#666' }}>
+                                        Logged in as: {user.email}
+                                    </SmallText>
+                                )}
+                            </div>
+                            <UserInfo>
+                                <Button onClick={() => navigate('/admin/shop/new')}>+ New Shop</Button>
+                                <Button onClick={handleLogout} variant="secondary">
+                                    Logout
+                                </Button>
+                            </UserInfo>
+                        </HeaderSection>
                     </div>
                 </GridItem>
 

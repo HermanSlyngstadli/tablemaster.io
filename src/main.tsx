@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import '@digdir/designsystemet-css'
 import './design-tokens-build/tablemaster.css'
+import { AuthProvider } from './contexts/AuthContext'
+import { ProtectedRoute } from './components/ProtectedRoute'
 import { NameGeneratorPage } from './pages/NameGeneratorPage'
 import { MainPage } from './pages/MainPage'
 import { MapGeneratorPage } from './pages/MapGeneratorPage'
@@ -19,15 +21,12 @@ import { AdminPage } from './pages/AdminPage'
 import { EditShopPage } from './pages/EditShopPage'
 import { ShopViewPage } from './pages/ShopViewPage'
 import { EditItemPage } from './pages/EditItemPage'
+import { LoginPage } from './pages/LoginPage'
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <MainPage />,
-    },
-    {
-        path: '/',
-        element: <ProductPage />,
     },
     {
         path: '/name-generator',
@@ -62,29 +61,63 @@ const router = createBrowserRouter([
         element: <ShopPage />,
     },
     {
+        path: '/admin/login',
+        element: <LoginPage />,
+    },
+    {
         path: '/admin',
-        element: <AdminPage />,
+        element: (
+            <ProtectedRoute>
+                <AdminPage />
+            </ProtectedRoute>
+        ),
     },
     {
         path: '/admin/shop/new',
-        element: <EditShopPage />,
+        element: (
+            <ProtectedRoute>
+                <EditShopPage />
+            </ProtectedRoute>
+        ),
     },
     {
         path: '/admin/shop/:shopId/edit',
-        element: <EditShopPage />,
+        element: (
+            <ProtectedRoute>
+                <EditShopPage />
+            </ProtectedRoute>
+        ),
     },
     {
         path: '/admin/shop/:shopId',
-        element: <ShopViewPage />,
+        element: (
+            <ProtectedRoute>
+                <ShopViewPage />
+            </ProtectedRoute>
+        ),
     },
     {
-        path: '/admin/shop/:shopId/item/:itemId',
-        element: <EditItemPage />,
+        path: '/admin/shop/:shopId/item/:itemId/edit',
+        element: (
+            <ProtectedRoute>
+                <EditItemPage />
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: '/admin/shop/:shopId/item/new',
+        element: (
+            <ProtectedRoute>
+                <EditItemPage />
+            </ProtectedRoute>
+        ),
     },
 ])
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
-        <RouterProvider router={router} />
+        <AuthProvider>
+            <RouterProvider router={router} />
+        </AuthProvider>
     </React.StrictMode>
 )
