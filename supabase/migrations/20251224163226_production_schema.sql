@@ -8,3 +8,4 @@
 -- No SQL needed here as the tables already exist in production
 -- This file exists only to satisfy Supabase's migration tracking
 
+

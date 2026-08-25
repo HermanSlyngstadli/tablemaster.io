@@ -32,3 +32,4 @@ export const EditIcon = ({ color = '#000', size = 24 }: IconTypes) => {
     )
 }
 
+

@@ -43,3 +43,4 @@ export const MoonIcon = ({ color = '#000', size = 24 }: IconTypes) => {
     )
 }
 
+

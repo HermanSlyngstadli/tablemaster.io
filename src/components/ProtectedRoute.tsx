@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { PageContainer } from './PageContainer'
 import { Heading2, Paragraph } from './Typography'
+import { Spinner } from '@digdir/designsystemet-react'
 
 interface ProtectedRouteProps {
     children: React.ReactNode
@@ -16,6 +17,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requir
         return (
             <PageContainer>
                 <Heading2>Loading...</Heading2>
+                <Spinner aria-label="loading" />
             </PageContainer>
         )
     }
