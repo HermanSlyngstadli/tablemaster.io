@@ -5,6 +5,7 @@ import { DiceIcon } from './icons/DiceIcon'
 import { HomeIcon } from './icons/HomeIcon'
 import { MapIcon } from './icons/MapIcon'
 import { NoteIcon } from './icons/NoteIcon'
+import { RefreshIcon } from './icons/RefreshIcon'
 import { ThemeIcon, MoonIcon } from './icons/ThemeIcon'
 import { supabase } from '../supabaseClient'
 import { useTheme } from '../contexts/ThemeContext'
@@ -111,6 +112,10 @@ export const SideNavigation = ({ ...props }) => {
 
                 <NavLink href={'/name-generator'}>
                     <DiceIcon color={'#fff'} size={16} />
+                </NavLink>
+
+                <NavLink href={'/name-synth'} title="Name Synth (experimental)">
+                    <RefreshIcon color={'#fff'} size={16} />
                 </NavLink>
 
                 <NavLink href={'/soundscape'}>

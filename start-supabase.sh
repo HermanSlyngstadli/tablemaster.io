@@ -15,3 +15,4 @@ fi
 # Start Supabase
 supabase start
 
+

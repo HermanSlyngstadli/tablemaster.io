@@ -6,6 +6,7 @@ type ButtonTypes = {
     children: React.ReactNode
     onClick?: () => void
     style?: React.CSSProperties
+    className?: string
     disabled?: boolean
     variant?: 'primary' | 'secondary' | 'tertiary'
     color?: 'primary' | 'secondary' | 'success' | 'danger'
@@ -22,6 +23,7 @@ export const Button = ({
     children,
     onClick,
     style,
+    className,
     disabled,
     variant = 'primary',
     color,
@@ -31,6 +33,7 @@ export const Button = ({
         <StyledButton
             onClick={onClick || (() => {})}
             style={style}
+            className={className}
             disabled={disabled}
             variant={variant}
             color={color}
