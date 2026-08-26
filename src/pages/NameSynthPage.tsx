@@ -28,6 +28,30 @@ import {
     pacific,
 } from '../nameSynthCorpora'
 import {
+    africanPlace,
+    americanPlace,
+    angloSaxonPlace,
+    arabianPlace,
+    chinesePlace,
+    dwarvenPlace,
+    dyrPlace,
+    easternEuropeanPlace,
+    elvenPlace,
+    germanicPlace,
+    gnomishPlace,
+    japanesePlace,
+    latinaPlace,
+    latinPlace,
+    malayPlace,
+    mediterraneanPlace,
+    monsterPlace,
+    namesPlace,
+    nordicPlace,
+    norsePlace,
+    orcishPlace,
+    pacificPlace,
+} from '../placeSynthCorpora'
+import {
     bigramSet,
     buildTables,
     generateBatch,
@@ -45,6 +69,7 @@ import {
     Paragraph,
     Select,
     SelectOption,
+    ToggleGroup,
 } from '@digdir/designsystemet-react'
 
 const PageHeading = styled(Heading)`
@@ -188,7 +213,7 @@ const NameTape = styled.div`
     gap: 8px;
 `
 
-const SOURCES = {
+const NAME_SOURCES = {
     dyr: { label: 'Dyr', list: dyr },
     monster: { label: 'Monster', list: monster },
     names: { label: 'Navn', list: names },
@@ -213,7 +238,39 @@ const SOURCES = {
     norse: { label: 'Norse', list: norse },
 } as const
 
-type SourceKey = keyof typeof SOURCES
+const PLACE_SOURCES = {
+    dyr: { label: 'Dyr', list: dyrPlace },
+    monster: { label: 'Monster', list: monsterPlace },
+    names: { label: 'Navn', list: namesPlace },
+    elven: { label: 'Elven', list: elvenPlace },
+    dwarven: { label: 'Dwarven', list: dwarvenPlace },
+    orcish: { label: 'Orcish', list: orcishPlace },
+    gnomish: { label: 'Gnomish', list: gnomishPlace },
+    nordic: { label: 'Nordic', list: nordicPlace },
+    easternEuropean: { label: 'Eastern European', list: easternEuropeanPlace },
+    arabian: { label: 'Arabian', list: arabianPlace },
+    mediterranean: { label: 'Mediterranean', list: mediterraneanPlace },
+    african: { label: 'African', list: africanPlace },
+    pacific: { label: 'Pacific', list: pacificPlace },
+    angloSaxon: { label: 'Anglo-Saxon', list: angloSaxonPlace },
+    latin: { label: 'Latin', list: latinPlace },
+    latina: { label: 'Latina', list: latinaPlace },
+    germanic: { label: 'Germanic', list: germanicPlace },
+    chinese: { label: 'Chinese', list: chinesePlace },
+    japanese: { label: 'Japanese', list: japanesePlace },
+    malay: { label: 'Malay', list: malayPlace },
+    american: { label: 'American', list: americanPlace },
+    norse: { label: 'Norse', list: norsePlace },
+} as const
+
+type CategoryKey = 'names' | 'places'
+
+const SOURCES_BY_CATEGORY: Record<CategoryKey, typeof NAME_SOURCES> = {
+    names: NAME_SOURCES,
+    places: PLACE_SOURCES,
+}
+
+type SourceKey = keyof typeof NAME_SOURCES
 
 type ChannelKey = 'order' | 'chaos' | 'rarity' | 'vowels' | 'harsh' | 'distinct' | 'minLen' | 'maxLen'
 
@@ -310,6 +367,7 @@ const defaultChannelValues = Object.fromEntries(CHANNELS.map((c) => [c.key, c.de
 const BATCH_SIZES = [5, 8, 10, 15, 20, 24]
 
 export const NameSynthPage = () => {
+    const [category, setCategory] = useState<CategoryKey>('names')
     const [sourceA, setSourceA] = useState<SourceKey>('monster')
     const [sourceB, setSourceB] = useState<SourceKey>('names')
     const [blend, setBlend] = useState(0)
@@ -318,8 +376,10 @@ export const NameSynthPage = () => {
     const [results, setResults] = useState<BatchResult | null>(null)
     const [copiedIndex, setCopiedIndex] = useState<number | null>(null)
 
-    const tablesA = useMemo(() => buildTables(SOURCES[sourceA].list), [sourceA])
-    const tablesB = useMemo(() => buildTables(SOURCES[sourceB].list), [sourceB])
+    const SOURCES = SOURCES_BY_CATEGORY[category]
+
+    const tablesA = useMemo(() => buildTables(SOURCES[sourceA].list), [SOURCES, sourceA])
+    const tablesB = useMemo(() => buildTables(SOURCES[sourceB].list), [SOURCES, sourceB])
     const mergedTables = useMemo(() => mergeTables(tablesA, tablesB, blend / 100), [tablesA, tablesB, blend])
 
     const sourceBigramSets = useMemo(
@@ -329,8 +389,14 @@ export const NameSynthPage = () => {
                 .map(normalizeName)
                 .filter(Boolean)
                 .map(bigramSet),
-        [sourceA, sourceB]
+        [SOURCES, sourceA, sourceB]
     )
+
+    const handleCategoryChange = (value: string) => {
+        setCategory(value as CategoryKey)
+        setResults(null)
+        setCopiedIndex(null)
+    }
 
     const setChannel = (key: ChannelKey, value: number) => {
         setChannelValues((prev) => {
@@ -383,6 +449,14 @@ export const NameSynthPage = () => {
                 </PageSubtitle>
                 <GeneratorSection>
                     <SettingsPanel>
+                        <StyledFieldset>
+                            <Fieldset.Legend data-size="md">Category</Fieldset.Legend>
+                            <ToggleGroup value={category} onChange={handleCategoryChange} name="category">
+                                <ToggleGroup.Item value="names">Names</ToggleGroup.Item>
+                                <ToggleGroup.Item value="places">Places</ToggleGroup.Item>
+                            </ToggleGroup>
+                        </StyledFieldset>
+
                         <StyledFieldset>
                             <Fieldset.Legend data-size="md">Sources</Fieldset.Legend>
                             <Field>
