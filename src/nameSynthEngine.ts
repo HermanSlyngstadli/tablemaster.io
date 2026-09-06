@@ -80,10 +80,14 @@ export const getDistribution = (
     return null
 }
 
-export const weightedSample = (entries: [string, number][]): string => {
+// rng defaults to Math.random so every existing call site keeps working
+// unchanged; callers that need reproducible output (e.g. map generation,
+// where the same seed should always name settlements the same way) pass
+// their own seeded generator instead.
+export const weightedSample = (entries: [string, number][], rng: () => number = Math.random): string => {
     const total = entries.reduce((s, e) => s + e[1], 0)
     if (total <= 0) return entries[0][0]
-    let r = Math.random() * total
+    let r = rng() * total
     for (const [ch, w] of entries) {
         if (r < w) return ch
         r -= w
@@ -101,7 +105,7 @@ export type GenerateOptions = {
     maxLen: number
 }
 
-export const generateOne = (tables: MarkovTable[], opts: GenerateOptions): string => {
+export const generateOne = (tables: MarkovTable[], opts: GenerateOptions, rng: () => number = Math.random): string => {
     const { order, temperature, vowelFactor, harshFactor, rarity, minLen, maxLen } = opts
     let seq = '^'.repeat(MAX_ORDER)
     let result = ''
@@ -138,7 +142,7 @@ export const generateOne = (tables: MarkovTable[], opts: GenerateOptions): strin
             return [ch, w]
         })
 
-        const next = weightedSample(entries)
+        const next = weightedSample(entries, rng)
         if (next === '$') break
         result += next
         seq += next
@@ -199,7 +203,8 @@ export const generateBatch = (
     tables: MarkovTable[],
     opts: BatchOptions,
     count: number,
-    sourceBigramSets: Set<string>[]
+    sourceBigramSets: Set<string>[],
+    rng: () => number = Math.random
 ): BatchResult => {
     const out: string[] = []
     let rejectedShape = 0
@@ -209,7 +214,7 @@ export const generateBatch = (
 
     while (out.length < count && attempts < cap) {
         attempts++
-        const n = generateOne(tables, opts)
+        const n = generateOne(tables, opts, rng)
         if (!isClean(n, opts.minLen, opts.maxLen)) {
             rejectedShape++
             continue
